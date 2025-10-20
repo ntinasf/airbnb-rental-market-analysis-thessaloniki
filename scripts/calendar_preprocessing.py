@@ -1,3 +1,4 @@
+import hashlib
 from pathlib import Path
 import pandas as pd
 
@@ -41,6 +42,36 @@ def drop_empty_columns(df, columns_to_drop):
         pd.DataFrame: DataFrame with columns removed
     """
     return df.drop(columns=columns_to_drop, axis=1)
+
+# Anonymization function for listing IDs
+def anonymize_listing_id(series):
+    """
+    Anonymize listing IDs using deterministic hashing.
+
+    Preserves: Uniqueness, consistency for joins
+    Removes: Searchability, reverse-lookup capability
+
+    Args:
+        series (pd.Series): Original listing ID column
+
+    Returns:
+        pd.Series: Anonymized IDs in format 'PROP_XXXX'
+
+    Example:
+        12345678 -> PROP_A7B3
+        98765432 -> PROP_C2F9
+    """
+
+    def hash_id(listing_id):
+        if pd.isna(listing_id):
+            return None
+        # Create deterministic hash (same ID always gets same result)
+        hash_obj = hashlib.md5(str(int(listing_id)).encode())
+        # Take first 4 characters of hex digest for readability
+        short_hash = hash_obj.hexdigest()[:4].upper()
+        return f"PROP_{short_hash}"
+
+    return series.apply(hash_id)
 
 
 def print_processing_report(original_df, processed_df, columns_dropped, stats):
@@ -100,6 +131,7 @@ if __name__ == "__main__":
     # Apply transformations
     calendar = convert_data_types(original_calendar)
     calendar = drop_empty_columns(calendar, columns_to_drop)
+    calendar["listing_id"] = anonymize_listing_id(calendar["listing_id"])
 
     # Collect statistics for report
     total = len(calendar)
