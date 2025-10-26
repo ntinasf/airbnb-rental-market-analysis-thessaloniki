@@ -216,6 +216,13 @@ def print_processing_report(original_df, processed_df, columns_dropped, stats):
     print(f"   Columns: {len(original_df.columns)} → {len(processed_df.columns)}")
     print(f"   Dropped: {len(columns_dropped)} columns")
 
+    print("\n🧹 Data Validation:")
+    print(f"   Problematic entries removed: {stats['removed_entries']:,}")
+    if stats["removed_entries"] > 0:
+        print(f"      - Extreme minimum_nights: {stats['extreme_min_nights']:,}")
+        print(f"      - High outlier prices: {stats['high_price_outliers']:,}")
+        print(f"      - Incomplete/inactive: {stats['incomplete_inactive']:,}")
+
     print("\n🔒 Anonymization:")
     print(f"   Listing IDs: {stats['ids_anonymized']:,}")
     print(f"   Host IDs: {stats['host_ids_anonymized']:,}")
@@ -277,7 +284,6 @@ if __name__ == "__main__":
         "calculated_host_listings_count_entire_homes",
         "calculated_host_listings_count_private_rooms",
         "calculated_host_listings_count_shared_rooms",
-        "neighbourhood"
     ]
 
     # Load dataset
@@ -337,6 +343,57 @@ if __name__ == "__main__":
     }
 
     listings = listings.astype(type_dict)
+    
+    # ========== DATA VALIDATION: Remove problematic entries ==========
+
+    # Track removed entries for reporting
+    initial_count = len(listings)
+
+    # 1. Top 10 extreme minimum_nights outliers
+    indices_1 = (
+        listings.sort_values(by="minimum_nights", ascending=False).head(10).index
+    )
+
+    # 2. Top 4 high price problematic outliers
+    indices_2 = listings.sort_values(by="price", ascending=False).head(5).index
+
+    # 3. Incomplete/inactive listings (missing critical data + no reviews)
+    indices_3 = listings[
+        listings["price"].isna()
+        & listings["bathrooms"].isna()
+        & listings["beds"].isna()
+        & (listings["number_of_reviews_ltm"] == 0)
+        & (listings["number_of_reviews_ly"] == 0)
+    ].index
+
+    # Combine all indices to remove (union prevents duplicates)
+    indices_to_remove = indices_1.union(indices_2).union(indices_3)
+
+    # Track removal statistics
+    removed_stats = {
+        "extreme_min_nights": len(indices_1),
+        "high_price_outliers": len(indices_2),
+        "incomplete_inactive": len(indices_3),
+        "total_removed": len(indices_to_remove),
+    }
+
+    # Remove problematic entries
+    listings.drop(index=indices_to_remove, inplace=True)
+
+    # ========== END DATA VALIDATION ==========
+
+    # Create host categories
+
+    listings["Host_Category"] = (
+        pd.cut(
+            listings["host_total_listings_count"],
+            bins=[0, 1, 3, float("inf")],
+            right=True,
+            labels=["Individual (1)", "Small Multi (2-3)", "Large Multi (4+)"],
+        )
+        .astype(str)
+        .fillna("Unknown")
+    )
 
     # Collect statistics for report
     total = len(listings)
@@ -361,6 +418,10 @@ if __name__ == "__main__":
     invalid_coords = (~(lat_valid & lon_valid) & listings["latitude"].notna()).sum()
 
     stats = {
+        "removed_entries": removed_stats["total_removed"],
+        "extreme_min_nights": removed_stats["extreme_min_nights"],
+        "high_price_outliers": removed_stats["high_price_outliers"],
+        "incomplete_inactive": removed_stats["incomplete_inactive"],
         "ids_anonymized": listings["id"].notna().sum(),
         "host_ids_anonymized": listings["host_id"].notna().sum(),
         "names_anonymized": listings["name"].notna().sum(),
@@ -374,7 +435,7 @@ if __name__ == "__main__":
         "unlicensed_pct": (unlicensed / total) * 100,
         "duplicate_licenses": duplicate_licenses,
         "missing_coords": missing_coords,
-        "invalid_coords": invalid_coords,
+        "invalid_coords": invalid_coords
     }
 
     # Save processed dataset
