@@ -39,7 +39,7 @@ __all__ = [
 ]
 
 
-def analyze_numeric_variable(data: pd.Series) -> None:
+def analyze_numeric_variable(data: pd.Series, include_outliers: bool = True) -> None:
     """
     Analyze a numeric variable with descriptive statistics and visualizations.
 
@@ -47,6 +47,8 @@ def analyze_numeric_variable(data: pd.Series) -> None:
     -----------
     data : pd.Series
         Numeric variable to analyze
+    include_outliers : bool, optional
+        Whether to show outliers in the box plot (default: True)
     """
     # Remove NaN values for analysis
     clean_data = data.dropna()
@@ -122,6 +124,7 @@ def analyze_numeric_variable(data: pd.Series) -> None:
         clean_data,
         vert=True,
         patch_artist=True,
+        showfliers=include_outliers,
         boxprops=dict(facecolor="lightgreen", alpha=0.7),
         medianprops=dict(color="red", linewidth=2),
         flierprops=dict(marker="o", markerfacecolor="red", markersize=5, alpha=0.5),
@@ -587,22 +590,10 @@ def analyze_categorical_categorical(cat_data1, cat_data2, alpha=0.05):
         print(f"\n⚠️ WARNING: {low_expected} cell(s) have expected frequency < 5.")
         print(f"  Chi-square test may not be reliable. Consider Fisher's exact test.")
 
-    return {
-        "chi2_statistic": chi2,
-        "p_value": p_value,
-        "degrees_of_freedom": dof,
-        "cramers_v": cramers_v,
-        "effect_interpretation": effect_interpretation,
-        "is_significant": is_significant,
-        "contingency_table": contingency,
-        "expected_frequencies": expected,
-        "interpretation": interpretation,
-        "variable1": col1,
-        "variable2": col2,
-    }
 
-
-def analyze_categorical_numerical(cat_data, num_data, alpha=0.05):
+def analyze_categorical_numerical(
+    cat_data, num_data, alpha=0.05, include_outliers=True
+):
     """
     Analyze relationship between a categorical and numerical variable.
 
@@ -614,6 +605,8 @@ def analyze_categorical_numerical(cat_data, num_data, alpha=0.05):
         Numerical variable
     alpha : float, default=0.05
         Significance level
+    include_outliers : bool, optional
+        Whether to show outliers in the box plot (default: True)
 
     Returns:
     --------
@@ -711,7 +704,12 @@ def analyze_categorical_numerical(cat_data, num_data, alpha=0.05):
 
     # Box plot
     combined_df.boxplot(
-        column=num_name, by=cat_name, ax=axes[0], patch_artist=True, grid=False
+        column=num_name,
+        by=cat_name,
+        ax=axes[0],
+        patch_artist=True,
+        grid=False,
+        showfliers=include_outliers,
     )
     axes[0].set_title(f"Box Plot: {num_name} by {cat_name}")
     axes[0].set_xlabel(cat_name)
