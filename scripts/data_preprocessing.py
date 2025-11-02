@@ -284,6 +284,8 @@ if __name__ == "__main__":
         "calculated_host_listings_count_entire_homes",
         "calculated_host_listings_count_private_rooms",
         "calculated_host_listings_count_shared_rooms",
+        "calendar_updated",
+        "has_availability"
     ]
 
     # Load dataset
@@ -319,9 +321,6 @@ if __name__ == "__main__":
     )
     listings["price"] = (
         listings["price"].str.lstrip("$").str.replace(",", "").astype(float)
-    )
-    listings["has_availability"] = listings["has_availability"].map(
-        {"t": True, "f": False}
     )
     listings["instant_bookable"] = listings["instant_bookable"].map(
         {"t": True, "f": False}
