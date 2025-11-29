@@ -10,7 +10,8 @@
 
 ## 📋 Executive Summary
 
-This project analyzes Thessaloniki's short-term rental market (4,817 Airbnb listings) to provide data-driven policy recommendations for the Tourism Development Authority. Through rigorous statistical analysis, we identified critical patterns in regulatory compliance, host ecosystem dynamics, and market quality trends.
+Using 4,700+ Airbnb listings, this project analyzes Thessaloniki's short-term rental market to provide data-driven policy recommendations for sustainable tourism growth. Through rigorous analytical methodology — including ANOVA testing, effect size calculations, and data quality validation — we identified critical patterns in regulatory compliance, host ecosystem dynamics, and market quality trends. 
+All sensitive data has been anonymized for public portfolio presentation.
 
 ### Key Findings
 

@@ -4,7 +4,6 @@ import pandas as pd
 
 # Define anonymization functions
 
-
 # Anonymization function for listing IDs
 def anonymize_listing_id(series):
     """
@@ -35,7 +34,7 @@ def anonymize_listing_id(series):
 
     return series.apply(hash_id)
 
-
+# Anonymization function for host IDs
 def anonymize_host_id(series):
     """
     Anonymize host IDs using deterministic hashing.
@@ -64,7 +63,7 @@ def anonymize_host_id(series):
     return series.apply(hash_id)
 
 
-# Anonymize listing names
+# Anonymization function for listing names
 def anonymize_listing_name(
     df, name_col="name", property_type_col="property_type", room_type_col="room_type"
 ):
@@ -150,7 +149,6 @@ def anonymize_coordinates(df, lat_col="latitude", lon_col="longitude", precision
 
     return lat_anon, lon_anon
 
-
 # License anonymization function
 def anonymize_license(series):
     """
@@ -204,7 +202,7 @@ def anonymize_license(series):
 
     return anonymized
 
-
+# Reporting function
 def print_processing_report(original_df, processed_df, columns_dropped, stats):
     """Print concise report of data transformations."""
     print("\n" + "=" * 60)

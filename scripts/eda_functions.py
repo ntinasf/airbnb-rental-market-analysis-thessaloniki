@@ -54,7 +54,7 @@ def analyze_numeric_variable(data: pd.Series, include_outliers: bool = True) -> 
     clean_data = data.dropna()
 
     if len(clean_data) == 0:
-        print("No data available after removing NaN values.")
+        print("⚠️  WARNING: No data available after removing NaN values.")
         return
 
     var_name = data.name if data.name else "Variable"
@@ -566,9 +566,9 @@ def analyze_categorical_categorical(cat_data1, cat_data2, alpha=0.05):
     plt.show()
 
     # Print results
-    print("=" * 80)
+    print("=" * 70)
     print(f"CHI-SQUARE TEST OF INDEPENDENCE: {col1} vs {col2}")
-    print("=" * 80)
+    print("=" * 70)
 
     print(f"\nContingency Table:")
     print(contingency)
@@ -587,8 +587,8 @@ def analyze_categorical_categorical(cat_data1, cat_data2, alpha=0.05):
     # Check for cells with low expected frequencies
     low_expected = (expected < 5).sum()
     if low_expected > 0:
-        print(f"\n⚠️ WARNING: {low_expected} cell(s) have expected frequency < 5.")
-        print(f"  Chi-square test may not be reliable. Consider Fisher's exact test.")
+        print(f"\n⚠️  WARNING: {low_expected} cell(s) have expected frequency < 5.")
+        print(f"   Chi-square test may not be reliable. Consider Fisher's exact test.")
 
 
 def analyze_categorical_numerical(
@@ -629,7 +629,7 @@ def analyze_categorical_numerical(
     n_groups = len(groups)
 
     if n_groups < 2:
-        print(f"ERROR: Need at least 2 groups for analysis. Found {n_groups} group(s).")
+        print(f"⚠️  ERROR: Need at least 2 groups for analysis. Found {n_groups} group(s).")
         return None
 
     # Create group data
@@ -736,9 +736,9 @@ def analyze_categorical_numerical(
     plt.show()
 
     # Print results
-    print("=" * 80)
+    print("=" * 70)
     print(f"{test_name.upper()}: {num_name} by {cat_name}")
-    print("=" * 80)
+    print("=" * 70)
 
     print(f"\nDescriptive Statistics by Group:")
     for group in groups:
@@ -782,7 +782,7 @@ def analyze_categorical_numerical(
     )
 
     if p_levene < 0.05 and n_groups == 2:
-        print(f"  ⚠️ Note: Welch's t-test was used (does not assume equal variances)")
+        print(f"   ⚠️  NOTE: Welch's t-test was used (does not assume equal variances)")
 
     return {
         "test_name": test_name,
@@ -823,7 +823,7 @@ def analyze_numerical_numerical(x_data, y_data, alpha=0.05):
     combined_df = combined_df.dropna()
 
     if len(combined_df) < 3:
-        print(f"ERROR: Need at least 3 observations. Found {len(combined_df)}.")
+        print(f"⚠️  ERROR: Need at least 3 observations. Found {len(combined_df)}.")
         return None
 
     x_clean = combined_df[x_name].values
@@ -857,9 +857,9 @@ def analyze_numerical_numerical(x_data, y_data, alpha=0.05):
     direction = "positive" if pearson_r > 0 else "negative"
 
     # Print results
-    print("=" * 80)
+    print("=" * 70)
     print(f"BIVARIATE CORRELATION ANALYSIS: {x_name} vs {y_name}")
-    print("=" * 80)
+    print("=" * 70)
 
     print(f"\nSample Size:")
     print(f"  Valid observations: {len(combined_df)}")
