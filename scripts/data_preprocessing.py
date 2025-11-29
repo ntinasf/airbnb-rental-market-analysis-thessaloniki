@@ -29,8 +29,8 @@ def anonymize_listing_id(series):
             return None
         # Create deterministic hash (same ID always gets same result)
         hash_obj = hashlib.md5(str(int(listing_id)).encode())
-        # Take first 4 characters of hex digest for readability
-        short_hash = hash_obj.hexdigest()[:4].upper()
+        # Take first 6 characters of hex digest for readability
+        short_hash = hash_obj.hexdigest()[:6].upper()
         return f"PROP_{short_hash}"
 
     return series.apply(hash_id)
@@ -58,7 +58,7 @@ def anonymize_host_id(series):
         if pd.isna(host_id):
             return None
         hash_obj = hashlib.md5(str(int(host_id)).encode())
-        short_hash = hash_obj.hexdigest()[:4].upper()
+        short_hash = hash_obj.hexdigest()[:6].upper()
         return f"HOST_{short_hash}"
 
     return series.apply(hash_id)
@@ -197,7 +197,7 @@ def anonymize_license(series):
         # For numbered licenses, create deterministic hash
         # MD5 ensures same license always gets same hash (duplicates preserved)
         hash_obj = hashlib.md5(str(value).encode())
-        short_hash = hash_obj.hexdigest()[:6].upper()
+        short_hash = hash_obj.hexdigest()[:8].upper()
         return f"LIC_{short_hash}"
 
     anonymized = series.apply(hash_license)
@@ -229,6 +229,36 @@ def print_processing_report(original_df, processed_df, columns_dropped, stats):
     print(f"   Names: {stats['names_anonymized']:,}")
     print(f"   Licenses: {stats['licenses_anonymized']:,}")
     print(f"   Coordinates: rounded to {stats['coord_precision']} decimals")
+
+    print("\n🔍 Distinct Values (Before → After Anonymization):")
+    distinct_before = stats["distinct_before"]
+    distinct_after = stats["distinct_after"]
+
+    def check_integrity(before, after, name):
+        status = "✓" if before == after else "⚠️"
+        return f"   {status} {name}: {before:,} → {after:,}"
+
+    print(
+        check_integrity(
+            distinct_before["listing_id"], distinct_after["listing_id"], "Listing IDs"
+        )
+    )
+    print(
+        check_integrity(
+            distinct_before["host_id"], distinct_after["host_id"], "Host IDs"
+        )
+    )
+    print(check_integrity(distinct_before["name"], distinct_after["name"], "Names"))
+    print(
+        check_integrity(
+            distinct_before["license"], distinct_after["license"], "Licenses"
+        )
+    )
+    print(
+        check_integrity(
+            distinct_before["coords"], distinct_after["coords"], "Coordinates"
+        )
+    )
 
     print("\n📋 License Distribution:")
     print(f"   Licensed: {stats['licensed']:,} ({stats['licensed_pct']:.1f}%)")
@@ -285,15 +315,24 @@ if __name__ == "__main__":
         "calculated_host_listings_count_private_rooms",
         "calculated_host_listings_count_shared_rooms",
         "calendar_updated",
-        "has_availability"
+        "has_availability",
     ]
 
     # Load dataset
     original_listings = pd.read_csv(raw_data_path)
     listings = original_listings.drop(columns=columns_to_drop)
 
-    # Track original license stats
+    # Track original license stats and distinct values before anonymization
     original_license = listings["license"].copy()
+
+    # Count distinct values BEFORE anonymization
+    distinct_before = {
+        "listing_id": listings["id"].nunique(),
+        "host_id": listings["host_id"].nunique(),
+        "name": listings["name"].nunique(),
+        "license": listings["license"].nunique(),
+        "coords": listings[["latitude", "longitude"]].drop_duplicates().shape[0],
+    }
 
     # Apply anonymization functions
     listings["id"] = anonymize_listing_id(listings["id"])
@@ -308,6 +347,15 @@ if __name__ == "__main__":
         listings, lat_col="latitude", lon_col="longitude", precision=4
     )
     listings["license"] = anonymize_license(listings["license"])
+
+    # Count distinct values AFTER anonymization
+    distinct_after = {
+        "listing_id": listings["id"].nunique(),
+        "host_id": listings["host_id"].nunique(),
+        "name": listings["name"].nunique(),
+        "license": listings["license"].nunique(),
+        "coords": listings[["latitude", "longitude"]].drop_duplicates().shape[0],
+    }
 
     # Data type conversions and cleaning
     listings["host_acceptance_rate"] = (
@@ -342,7 +390,7 @@ if __name__ == "__main__":
     }
 
     listings = listings.astype(type_dict)
-    
+
     # ========== DATA VALIDATION: Remove problematic entries ==========
 
     # Track removed entries for reporting
@@ -434,7 +482,9 @@ if __name__ == "__main__":
         "unlicensed_pct": (unlicensed / total) * 100,
         "duplicate_licenses": duplicate_licenses,
         "missing_coords": missing_coords,
-        "invalid_coords": invalid_coords
+        "invalid_coords": invalid_coords,
+        "distinct_before": distinct_before,
+        "distinct_after": distinct_after,
     }
 
     # Save processed dataset
