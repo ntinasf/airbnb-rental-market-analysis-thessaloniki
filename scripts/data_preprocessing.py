@@ -4,6 +4,7 @@ import pandas as pd
 
 # Define anonymization functions
 
+
 # Anonymization function for listing IDs
 def anonymize_listing_id(series):
     """
@@ -33,6 +34,7 @@ def anonymize_listing_id(series):
         return f"PROP_{short_hash}"
 
     return series.apply(hash_id)
+
 
 # Anonymization function for host IDs
 def anonymize_host_id(series):
