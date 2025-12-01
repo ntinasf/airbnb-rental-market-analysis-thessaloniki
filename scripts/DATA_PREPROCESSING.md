@@ -35,10 +35,38 @@ Removes problematic entries:
 - Categories: `neighbourhood_cleansed`, `property_type`, `room_type`
 
 ### 5. Feature Engineering
+
+#### Host Classification
 - **Host_Category**: Bins hosts by listing count
   - Individual (1)
   - Small Multi (2-3)
   - Large Multi (4+)
+
+#### Geographic Features
+- **distance_to_center_km**: Geodesic distance from city center (White Tower / Aristotelous Square midpoint at 40.62962, 22.94473)
+- **distance_cat**: Distance category
+  - Downtown (<1km)
+  - Inner City (1-3km)
+  - Neighborhoods (3-6km)
+  - Suburban (>6km)
+
+#### Price Classification
+- **price_cat**: Price category
+  - Very Low (<40€)
+  - Low (40-60€)
+  - Medium (60-80€)
+  - High (80-120€)
+  - Very High (>120€)
+
+#### Temporal Features
+- **first_review_date**: First review as datetime
+- **last_review_date**: Last review as datetime
+- **listing_age_years**: Years since first review (relative to latest review in dataset)
+- **market_maturity**: Market maturity category
+  - New (<2yr)
+  - Growing (2-4yr)
+  - Mature (4-8yr)
+  - Established (>8yr)
 
 ## Output
 - Format: Parquet (compressed, efficient for analysis)

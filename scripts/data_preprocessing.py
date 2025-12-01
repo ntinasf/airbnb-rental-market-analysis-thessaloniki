@@ -1,6 +1,7 @@
 from pathlib import Path
 import hashlib
 import pandas as pd
+import numpy as np
 
 # Define anonymization functions
 
@@ -429,8 +430,9 @@ if __name__ == "__main__":
 
     # ========== END DATA VALIDATION ==========
 
-    # Create host categories
+    # ========== FEATURE ENGINEERING ==========
 
+    # Host categories based on listing count
     listings["Host_Category"] = (
         pd.cut(
             listings["host_total_listings_count"],
@@ -441,6 +443,51 @@ if __name__ == "__main__":
         .astype(str)
         .fillna("Unknown")
     )
+
+    # Geographic features: Distance from city center
+    from geopy.distance import geodesic
+
+    landmark_coords = (40.62962, 22.94473)  # Midpoint: White Tower / Aristotelous Square
+
+    listings["distance_to_center_km"] = listings.apply(
+        lambda row: geodesic(
+            (row["latitude"], row["longitude"]), landmark_coords
+        ).km
+        if pd.notna(row["latitude"]) and pd.notna(row["longitude"])
+        else np.nan,
+        axis=1,
+    )
+
+    listings["distance_cat"] = pd.cut(
+        listings["distance_to_center_km"],
+        bins=[0, 1, 3, 6, 100],
+        labels=["Downtown (<1km)", "Inner City (1-3km)", "Neighborhoods (3-6km)", "Suburban (>6km)"],
+    )
+
+    # Price categories
+    listings["price_cat"] = pd.cut(
+        listings["price"],
+        bins=[0, 40, 60, 80, 120, np.inf],
+        labels=["Very Low (<40€)", "Low (40-60€)", "Medium (60-80€)", "High (80-120€)", "Very High (>120€)"],
+    )
+
+    # Temporal features: Listing age and market maturity
+    listings["first_review_date"] = pd.to_datetime(listings["first_review"])
+    listings["last_review_date"] = pd.to_datetime(listings["last_review"])
+
+    reference_date = listings["last_review_date"].max()
+
+    listings["listing_age_years"] = (
+        reference_date - listings["first_review_date"]
+    ).dt.days / 365.25
+
+    listings["market_maturity"] = pd.cut(
+        listings["listing_age_years"],
+        bins=[-1, 2, 4, 8, 100],
+        labels=["New (<2yr)", "Growing (2-4yr)", "Mature (4-8yr)", "Established (>8yr)"],
+    )
+
+    # ========== END FEATURE ENGINEERING ==========
 
     # Collect statistics for report
     total = len(listings)
