@@ -946,18 +946,3 @@ def analyze_numerical_numerical(x_data, y_data, alpha=0.05):
 
     plt.tight_layout()
     plt.show()
-
-    return {
-        "pearson_r": pearson_r,
-        "pearson_p": pearson_p,
-        "spearman_rho": spearman_rho,
-        "spearman_p": spearman_p,
-        "r_squared": r_squared,
-        "slope": z[0],
-        "intercept": z[1],
-        "n_observations": len(combined_df),
-        "strength": strength,
-        "direction": direction,
-        "x_variable": x_name,
-        "y_variable": y_name,
-    }
