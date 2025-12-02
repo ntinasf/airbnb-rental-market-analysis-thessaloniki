@@ -265,7 +265,7 @@ def analyze_categorical_variable(data: pd.Series) -> None:
     axes[0].set_xlabel(var_name, fontsize=12)
     axes[0].set_ylabel("Frequency", fontsize=12)
     axes[0].set_title(f"Bar Chart of {var_name}", fontsize=14, fontweight="bold")
-    axes[0].tick_params(axis="x", rotation=45)
+    axes[0].tick_params(axis="x", rotation=0)
     axes[0].grid(axis="y", alpha=0.3)
 
     # Add count labels on bars
@@ -560,7 +560,7 @@ def analyze_categorical_categorical(cat_data1, cat_data2, alpha=0.05):
     axes[1].set_xlabel(col1)
     axes[1].set_ylabel("Proportion")
     axes[1].legend(title=col2, bbox_to_anchor=(1.05, 1), loc="upper left")
-    axes[1].set_xticklabels(axes[1].get_xticklabels(), rotation=45, ha="right")
+    axes[1].set_xticklabels(axes[1].get_xticklabels(), rotation=0, ha="center")
 
     plt.tight_layout()
     plt.show()
@@ -629,7 +629,9 @@ def analyze_categorical_numerical(
     n_groups = len(groups)
 
     if n_groups < 2:
-        print(f"⚠️  ERROR: Need at least 2 groups for analysis. Found {n_groups} group(s).")
+        print(
+            f"⚠️  ERROR: Need at least 2 groups for analysis. Found {n_groups} group(s)."
+        )
         return None
 
     # Create group data
@@ -715,22 +717,24 @@ def analyze_categorical_numerical(
     axes[0].set_xlabel(cat_name)
     axes[0].set_ylabel(num_name)
     plt.sca(axes[0])
-    plt.xticks(rotation=45, ha="right")
+    plt.xticks(rotation=0, ha="center")
 
     # Violin plot
     sns.violinplot(
         data=combined_df,
         x=cat_name,
         y=num_name,
+        hue=cat_name,
         ax=axes[1],
         palette="Set2",
         inner="box",
+        legend=False,
     )
     axes[1].set_title(f"Violin Plot: {num_name} by {cat_name}")
     axes[1].set_xlabel(cat_name)
     axes[1].set_ylabel(num_name)
-    axes[1].tick_params(axis="x", rotation=45)
-    plt.setp(axes[1].xaxis.get_majorticklabels(), rotation=45, ha="right")
+    axes[1].tick_params(axis="x", rotation=0)
+    plt.setp(axes[1].xaxis.get_majorticklabels(), rotation=0, ha="center")
 
     plt.tight_layout()
     plt.show()
@@ -783,21 +787,6 @@ def analyze_categorical_numerical(
 
     if p_levene < 0.05 and n_groups == 2:
         print(f"   ⚠️  NOTE: Welch's t-test was used (does not assume equal variances)")
-
-    return {
-        "test_name": test_name,
-        "test_statistic": stat,
-        "p_value": p_value,
-        "effect_size": effect_size,
-        "effect_measure": effect_measure,
-        "effect_interpretation": effect_interpretation,
-        "is_significant": is_significant,
-        "n_groups": n_groups,
-        "groups": groups,
-        "interpretation": interpretation,
-        "categorical_variable": cat_name,
-        "numerical_variable": num_name,
-    }
 
 
 def analyze_numerical_numerical(x_data, y_data, alpha=0.05):
