@@ -26,6 +26,7 @@ Removes problematic entries:
 - Top 10 extreme `minimum_nights` outliers
 - Top 5 high price outliers
 - Inactive listings (missing price/bathrooms/beds + zero reviews)
+- Dead listings (zero activity: `number_of_reviews=0`, `estimated_occupancy_l365d=0`, `estimated_revenue_l365d=0` AND missing review data: `first_review`, `last_review`, `review_scores_rating` all null)
 
 ### 4. Type Conversions
 - Percentages (`host_acceptance_rate`): string → float (0-1)

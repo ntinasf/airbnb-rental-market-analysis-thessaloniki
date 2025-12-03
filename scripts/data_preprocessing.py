@@ -223,6 +223,7 @@ def print_processing_report(original_df, processed_df, columns_dropped, stats):
         print(f"      - Extreme minimum_nights: {stats['extreme_min_nights']:,}")
         print(f"      - High outlier prices: {stats['high_price_outliers']:,}")
         print(f"      - Incomplete/inactive: {stats['incomplete_inactive']:,}")
+        print(f"      - Dead listings (zero activity + no reviews): {stats['dead_listings']:,}")
 
     print("\n🔒 Anonymization:")
     print(f"   Listing IDs: {stats['ids_anonymized']:,}")
@@ -414,14 +415,26 @@ if __name__ == "__main__":
         & (listings["number_of_reviews_ly"] == 0)
     ].index
 
+    # 4. Dead/inactive listings (zero activity metrics + missing review data)
+    # These are listings with no booking activity AND no review history
+    indices_4 = listings[
+        (listings["number_of_reviews"] == 0)
+        & (listings["estimated_occupancy_l365d"] == 0)
+        & (listings["estimated_revenue_l365d"] == 0)
+        & listings["first_review"].isna()
+        & listings["last_review"].isna()
+        & listings["review_scores_rating"].isna()
+    ].index
+
     # Combine all indices to remove (union prevents duplicates)
-    indices_to_remove = indices_1.union(indices_2).union(indices_3)
+    indices_to_remove = indices_1.union(indices_2).union(indices_3).union(indices_4)
 
     # Track removal statistics
     removed_stats = {
         "extreme_min_nights": len(indices_1),
         "high_price_outliers": len(indices_2),
         "incomplete_inactive": len(indices_3),
+        "dead_listings": len(indices_4),
         "total_removed": len(indices_to_remove),
     }
 
@@ -516,6 +529,7 @@ if __name__ == "__main__":
         "extreme_min_nights": removed_stats["extreme_min_nights"],
         "high_price_outliers": removed_stats["high_price_outliers"],
         "incomplete_inactive": removed_stats["incomplete_inactive"],
+        "dead_listings": removed_stats["dead_listings"],
         "ids_anonymized": listings["id"].notna().sum(),
         "host_ids_anonymized": listings["host_id"].notna().sum(),
         "names_anonymized": listings["name"].notna().sum(),
