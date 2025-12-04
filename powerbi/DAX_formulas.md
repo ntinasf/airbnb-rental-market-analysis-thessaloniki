@@ -96,7 +96,7 @@ DIVIDE(
 Multi-Host Count = 
 CALCULATE(
     COUNTROWS(listings_geographic_temporal),
-    listings_geographic_temporal[Host_Category] = "Large Multi (4+)"
+    listings_geographic_temporal[host_category] = "Large Multi (11+)"
 )
 ```
 
@@ -118,13 +118,13 @@ Superhost Premium Individual =
 VAR SuperhostRevenue = 
     CALCULATE(
         AVERAGE(listings_geographic_temporal[estimated_revenue_l365d]),
-        listings_geographic_temporal[Host_Category] = "Individual (1)",
+        listings_geographic_temporal[host_category] = "Individual (1)",
         listings_geographic_temporal[is_superhost] = TRUE
     )
 VAR NonSuperhostRevenue = 
     CALCULATE(
         AVERAGE(listings_geographic_temporal[estimated_revenue_l365d]),
-        listings_geographic_temporal[Host_Category] = "Individual (1)",
+        listings_geographic_temporal[host_category] = "Individual (1)",
         listings_geographic_temporal[is_superhost] = FALSE
     )
 RETURN 
@@ -150,7 +150,7 @@ CALCULATE(
         ),
         COUNTROWS(listings_geographic_temporal)
     ),
-    listings_geographic_temporal[Host_Category] = "Small Multi (2-3)"
+    listings_geographic_temporal[host_category] = "Small Multi (2-3)"
 )
 ```
 
@@ -160,7 +160,7 @@ CALCULATE(
 Large Multi Non-SH Rating = 
 CALCULATE(
     AVERAGE(listings_geographic_temporal[review_scores_rating]),
-    listings_geographic_temporal[Host_Category] = "Large Multi (4+)",
+    listings_geographic_temporal[host_category] = "Large Multi (11+)",
     listings_geographic_temporal[host_is_superhost] = FALSE
 )
 ```
@@ -176,13 +176,13 @@ Revenue Multiplier Small Multi =
 VAR SH = 
     CALCULATE(
         AVERAGE(listings_geographic_temporal[estimated_revenue_l365d]),
-        listings_geographic_temporal[Host_Category] = "Small Multi (2-3)",
+        listings_geographic_temporal[host_category] = "Small Multi (2-3)",
         listings_geographic_temporal[host_is_superhost] = TRUE
     )
 VAR NonSH = 
     CALCULATE(
         AVERAGE(listings_geographic_temporal[estimated_revenue_l365d]),
-        listings_geographic_temporal[Host_Category] = "Small Multi (2-3)",
+        listings_geographic_temporal[host_category] = "Small Multi (2-3)",
         listings_geographic_temporal[host_is_superhost] = FALSE
     )
 RETURN 
@@ -196,13 +196,13 @@ Revenue Multiplier Large Multi =
 VAR SH = 
     CALCULATE(
         AVERAGE(listings_geographic_temporal[estimated_revenue_l365d]),
-        listings_geographic_temporal[Host_Category] = "Large Multi (4+)",
+        listings_geographic_temporal[host_category] = "Large Multi (11+)",
         listings_geographic_temporal[host_is_superhost] = TRUE
     )
 VAR NonSH = 
     CALCULATE(
         AVERAGE(listings_geographic_temporal[estimated_revenue_l365d]),
-        listings_geographic_temporal[Host_Category] = "Large Multi (4+)",
+        listings_geographic_temporal[host_category] = "Large Multi (11+)",
         listings_geographic_temporal[host_is_superhost] = FALSE
     )
 RETURN 
@@ -241,7 +241,7 @@ CALCULATE(
     DIVIDE(
         CALCULATE(
             COUNTROWS(listings_geographic_temporal),
-            listings_geographic_temporal[Host_Category] = "Large Multi (4+)"
+            listings_geographic_temporal[host_category] = "Large Multi (11+)"
         ),
         COUNTROWS(listings_geographic_temporal)
     ),
@@ -257,7 +257,7 @@ CALCULATE(
     DIVIDE(
         CALCULATE(
             COUNTROWS(listings_geographic_temporal),
-            listings_geographic_temporal[Host_Category] = "Large Multi (4+)"
+            listings_geographic_temporal[host_category] = "Large Multi (11+)"
         ),
         COUNTROWS(listings_geographic_temporal)
     ),
@@ -270,12 +270,12 @@ CALCULATE(
 ```dax
 Host Category Distribution = 
 VAR CurrentLocation = SELECTEDVALUE(listings_geographic_temporal[distance_cat])
-VAR CurrentHostCat = SELECTEDVALUE(listings_geographic_temporal[Host_Category])
+VAR CurrentHostCat = SELECTEDVALUE(listings_geographic_temporal[host_category])
 VAR CountInCategory = 
     CALCULATE(
         COUNTROWS(listings_geographic_temporal),
         listings_geographic_temporal[distance_cat] = CurrentLocation,
-        listings_geographic_temporal[Host_Category] = CurrentHostCat
+        listings_geographic_temporal[host_category] = CurrentHostCat
     )
 VAR TotalInLocation = 
     CALCULATE(
@@ -304,13 +304,13 @@ Quality Decline Percentage =
 VAR Pre2022Rating = 
     CALCULATE(
         AVERAGE(listings_geographic_temporal[review_scores_rating]),
-        listings_geographic_temporal[Host_Category] = "Large Multi (4+)",
+        listings_geographic_temporal[host_category] = "Large Multi (11+)",
         YEAR(listings_geographic_temporal[first_review_date]) <= 2022
     )
 VAR Post2023Rating = 
     CALCULATE(
         AVERAGE(listings_geographic_temporal[review_scores_rating]),
-        listings_geographic_temporal[Host_Category] = "Large Multi (4+)",
+        listings_geographic_temporal[host_category] = "Large Multi (11+)",
         YEAR(listings_geographic_temporal[first_review_date]) >= 2023
     )
 VAR Decline = Post2023Rating - Pre2022Rating
@@ -325,14 +325,14 @@ Budget Segment Quality Decline =
 VAR Pre2022 = 
     CALCULATE(
         AVERAGE(listings_geographic_temporal[review_scores_rating]),
-        listings_geographic_temporal[Host_Category] = "Large Multi (4+)",
+        listings_geographic_temporal[host_category] = "Large Multi (11+)",
         listings_geographic_temporal[price_cat] = "Very Low (<40€)",
         YEAR(listings_geographic_temporal[first_review]) <= 2022
     )
 VAR Post2023 = 
     CALCULATE(
         AVERAGE(listings_geographic_temporal[review_scores_rating]),
-        listings_geographic_temporal[Host_Category] = "Large Multi (4+)",
+        listings_geographic_temporal[host_category] = "Large Multi (11+)",
         listings_geographic_temporal[price_cat] = "Very Low (<40€)",
         YEAR(listings_geographic_temporal[first_review]) >= 2023
     )
@@ -345,13 +345,13 @@ RETURN
 ```dax
 Avg Rating by Cohort = 
 VAR CurrentYear = SELECTEDVALUE(listings_geographic_temporal[first_review_date])
-VAR CurrentHostCat = SELECTEDVALUE(listings_geographic_temporal[Host_Category])
+VAR CurrentHostCat = SELECTEDVALUE(listings_geographic_temporal[host_category])
 VAR CurrentPriceCat = SELECTEDVALUE(listings_geographic_temporal[price_cat])
 RETURN
     CALCULATE(
         AVERAGE(listings_geographic_temporal[review_scores_rating]),
         YEAR(listings_geographic_temporal[first_review_date]) = CurrentYear,
-        listings_geographic_temporal[Host_Category] = CurrentHostCat,
+        listings_geographic_temporal[host_category] = CurrentHostCat,
         listings_geographic_temporal[price_cat] = CurrentPriceCat
     )
 ```

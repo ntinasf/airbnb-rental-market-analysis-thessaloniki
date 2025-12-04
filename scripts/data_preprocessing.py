@@ -445,17 +445,20 @@ if __name__ == "__main__":
 
     # ========== FEATURE ENGINEERING ==========
 
-    # Host categories based on listing count
-    listings["Host_Category"] = (
-        pd.cut(
-            listings["host_total_listings_count"],
-            bins=[0, 1, 3, float("inf")],
-            right=True,
-            labels=["Individual (1)", "Small Multi (2-3)", "Large Multi (4+)"],
-        )
-        .astype(str)
-        .fillna("Unknown")
-    )
+    # Host categories based on listing count (4-tier system)
+    def categorize_host_count(count):
+        if pd.isna(count):
+            return "Unknown"
+        elif count == 1:
+            return "Individual (1)"
+        elif count <= 3:
+            return "Small Multi (2-3)"
+        elif count <= 10:
+            return "Medium Multi (4-10)"
+        else:
+            return "Large Multi (11+)"
+
+    listings["host_category"] = listings["host_total_listings_count"].apply(categorize_host_count)
 
     # Geographic features: Distance from city center
     from geopy.distance import geodesic

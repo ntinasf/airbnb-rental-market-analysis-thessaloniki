@@ -38,10 +38,11 @@ Removes problematic entries:
 ### 5. Feature Engineering
 
 #### Host Classification
-- **Host_Category**: Bins hosts by listing count
-  - Individual (1)
-  - Small Multi (2-3)
-  - Large Multi (4+)
+- **host_category**: Categorizes hosts by total listing count (4-tier system)
+  - Individual (1): Single-listing hosts, casual/occasional operators
+  - Small Multi (2-3): Semi-professional, transitioning to STR business
+  - Medium Multi (4-10): Professional operators, dedicated STR management
+  - Large Multi (11+): Commercial/corporate operators, scaled operations
 
 #### Geographic Features
 - **distance_to_center_km**: Geodesic distance from city center (White Tower / Aristotelous Square midpoint at 40.62962, 22.94473)
