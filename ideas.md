@@ -51,3 +51,31 @@ Property type breakdown (similar to previous pages)
 Host composition analysis (individual vs multi-property)
 
 This legitimate market overview becomes the baseline against which you'll test your hypotheses about optimal host types (H3), performance drivers (H4), and geographic strategies (H5). It demonstrates market health before diving into optimization opportunities.
+<hr>
+order = CATEGORY_ORDER
+categories = [] # replace with constants defined in the notebook,
+replace repeated code (visuals, test, with functions)
+
+<hr>
+for report
+
+
+estimated revenue: Document the price distribution in your technical notebook with a note that "pricing strategies are consistent across host types, confirming revenue differences reflect operational performance rather than pricing positioning.
+
+acceptance rate
+"Professional hosts (4+ listings) demonstrate marginally higher operational standards, with ~5 percentage points higher acceptance rates, suggesting more systematic management practices."
+
+superhost opening
+"The Sweet Spot of Host Professionalization"
+
+Small and medium multi-listing hosts (2-10 listings) achieve the highest superhost rates (45-47%), significantly outperforming both individual hosts (39%) and large commercial operators (32%). This suggests a "growth mindset" phase where operators are actively investing in guest experience to build their business reputation.
+
+Individual hosts, while providing authentic experiences, may lack the motivation to pursue platform-specific metrics. Large operators, managing 11+ listings, appear to prioritize operational efficiency over personalized service, resulting in fewer superhost certifications.
+
+This pattern has implications for market quality: the mid-scale segment (2-10 listings) appears to optimize for both growth AND guest satisfaction, making them potentially the most desirable host category from a tourism quality perspective.
+
+But does superhost status translate to tangible performance advantages? The following analysis explores whether this quality investment pays off...
+Transition: "But does this quality certification translate to revenue? Let's examine the superhost premium..."
+<hr>
+for dashboard
+add gradient rating effect on 2nd page plus error bars
