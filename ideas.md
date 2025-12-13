@@ -76,6 +76,41 @@ This pattern has implications for market quality: the mid-scale segment (2-10 li
 
 But does superhost status translate to tangible performance advantages? The following analysis explores whether this quality investment pays off...
 Transition: "But does this quality certification translate to revenue? Let's examine the superhost premium..."
+
+###############
+geographic performance
+
+est revenue
+
+"Downtown properties earn ~30% more than other zones at median (€3,192 vs €2,268), but location explains only 1.5% of revenue variation (η² = 0.015). This suggests operational factors — host professionalization, pricing strategy, quality — matter far more than geography alone."
+
+host cat
+
+"Thessaloniki's professional hosting sector is spatially concentrated: Large Multi-property operators capture 45% of downtown listings but only 13% of suburban properties — a 3.4x difference. This center-periphery gradient reflects economic realities: prime tourist locations justify the overhead of professional management, while peripheral neighborhoods remain the domain of individual hosts sharing spare rooms or second homes. For policymakers, this means regulatory focus on central districts would address the majority of commercial STR activity."
+
+superhost status
+
+This finding complements your host_category × distance finding perfectly:
+
+Downtown paradox: 45% Large Multi hosts (lowest superhost rates per H3) yet 48% overall superhosts
+Implication: Downtown's smaller operators must have exceptionally high superhost rates to pull up the zone average
+Policy angle: Downtown's quality floor is higher — even non-professional hosts meet superhost standards there
+This creates a compelling narrative: "Downtown attracts both professional operators AND quality-conscious individuals — it's where the best compete."
+
+"Downtown's 48% superhost rate initially puzzled us — how does a zone dominated by Large Multi operators (45% of listings, 32% superhost rate market-wide) achieve such quality density? The answer: downtown's competitive pressure forces adaptation. Large Multi operators in downtown achieve 45% superhost status — 13 percentage points above their market average. But the real surprise is Medium Multi hosts, who reach 58% superhost rate downtown — suggesting mid-sized professional operators combine the quality orientation of smaller hosts with the operational efficiency of larger ones. Downtown doesn't just attract professional operators; it improves them."
+
+Include this finding — it's one of the most actionable insights:
+
+For hosts: Medium Multi scale (4-10 listings) may be the optimal portfolio size for quality AND presence in prime locations
+For policymakers: Downtown's competitive dynamics self-regulate quality; peripheral areas lack this natural pressure
+Connects H3 + H5: Shows host type effects are geographically contingent
+
+
+review scores location
+
+"Downtown's location rating advantage (4.87 vs 4.63 Inner City) with the tightest variance (σ=0.26) creates a quality floor that makes superhost maintenance easier. Hosts in prime locations face fewer guest complaints about 'being far from attractions' — a common rating killer. This structural advantage partly explains why even Large Multi operators achieve 45% superhost rate downtown versus 32% market-wide."
+
+
 <hr>
 for dashboard
 add gradient rating effect on 2nd page plus error bars
