@@ -111,6 +111,35 @@ review scores location
 "Downtown's location rating advantage (4.87 vs 4.63 Inner City) with the tightest variance (σ=0.26) creates a quality floor that makes superhost maintenance easier. Hosts in prime locations face fewer guest complaints about 'being far from attractions' — a common rating killer. This structural advantage partly explains why even Large Multi operators achieve 45% superhost rate downtown versus 32% market-wide."
 
 
+#########################
+
+temporal dynamics
+
+distance cat - nothing important to note
+"Geographic distribution of listings has remained remarkably stable across market cohorts, with Inner City consistently absorbing the majority of new supply regardless of entry timing (Cramér's V = 0.05, negligible)."
+
+host category
+
+"Who's Driving the Boom?"
+
+Thessaloniki's STR market has undergone structural transformation. Among listings entering pre-2017 (Established), host types were relatively balanced. But the post-COVID surge tells a different story: Large Multi-property operators now capture 43% of new market entries, nearly double their share among veteran listings.
+
+Interestingly, Individual hosts show a U-shaped pattern—declining during 2020-2022 but rebounding strongly in 2023-2024, suggesting renewed interest from Greeks seeking tourism income. The losers? Mid-scale operators (2-10 listings), squeezed between professional scale and authentic appeal.
+
+price cat
+
+"Price segment distribution has remained stable across market cohorts, with Low (€40-60) consistently representing ~40-45% of listings regardless of entry timing (Cramér's V = 0.05, negligible)."
+
+host is superhost
+
+
+
+
 <hr>
 for dashboard
 add gradient rating effect on 2nd page plus error bars
+
+
+
+####################
+now that we have a full story lets build a blueprint for the overall report and an executive one. For the executive report i dont know much, and even maybe the power bi dashboard can even replace it, so i am counting on your experience and opinion if i should bulid it and how. For the analytical report i want to glue the stories told by the notebooks in one coherent story that would be worthy of publishing to my personal portfolio website. Here i dont know the right analogy of statistical jargon and analytic depth vs accessible-to-everyone storytelling. i am a big fan of scott galloway's data story telling and writting (if you are aware of his style) so i was thinking if something similar would word in this case, ie tell the story nicely but also include statistical validity statements (like effect sizes, variance explained, sample sizes) followed by the right visual to communicate it. So if you agree on this approach, i want you to create on the main directory a report.md file that draws context from the notebooks regulatory_compliance.ipynb, host_type_impact.ipynb, geographic_performance.ipynb, temporal-dynamics.ipynb and crafts a story built as i suggested above. there should an opening paragraph with general info, and then smooth transittions to the topics covered by the notebooks, in the order provied. Make sure to include  clear and clever headings for each topic change and to incorporate the business questions answered in the flow. Use place holders for visuals and statistically important number for me to fill. Tailor the suggestion into the narrative and do an approprite closing that paintsa  biggger picture enhanced by our findings. There will be more iterations on this file to improve it but do your best so that we start from the best place possible. If you agree with the executive summary create a separate md that fits your likining. finally dont use the h3, h5 etc namings, those were just for our convenience.
