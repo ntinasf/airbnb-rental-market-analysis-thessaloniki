@@ -21,6 +21,23 @@ Superhost Distribution: Quality indicator across the market
 Host Tenure: Experience levels in the legitimate market
 Response Rate Patterns: Service quality baseline
 
+Large multi-property operators accept almost everything (98.4%) because:
+
+Volume over selectivity - They're running a numbers game, not curating guest experiences
+Lower standards - They don't turn away "risky" bookings that individual hosts might decline
+Efficiency-driven - Less time spent evaluating each request, just accept and move on
+No personal stake - It's not their home, so less concern about who stays
+Meanwhile, individual hosts are more selective (92.3%) because:
+
+They care about guest fit
+They may decline last-minute requests or short stays
+They protect their property/neighborhood relationships
+The Irony
+High acceptance rate + Low quality scores = "Accept everyone, deliver less"
+
+This is the opposite of a superhost approach (which emphasizes selective quality).
+
+
 Guest Satisfaction Baseline
 
 Review Score Distribution: Overall satisfaction patterns
