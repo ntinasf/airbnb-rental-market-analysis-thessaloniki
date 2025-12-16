@@ -28,14 +28,29 @@ Removes problematic entries:
 - Inactive listings (missing price/bathrooms/beds + zero reviews)
 - Dead listings (zero activity: `number_of_reviews=0`, `estimated_occupancy_l365d=0`, `estimated_revenue_l365d=0` AND missing review data: `first_review`, `last_review`, `review_scores_rating` all null)
 
-### 4. Type Conversions
+### 4. Missing Value Imputation
+
+#### Host Category Imputation
+Some listings have missing `host_total_listings_count` values, resulting in "Unknown" host categories. These are imputed based on the actual count of listings per host in the dataset:
+
+| Step | Description |
+|------|-------------|
+| 1 | Identify listings with "Unknown" host_category |
+| 2 | Count actual listings per host ID in the dataset |
+| 3 | Map counts to host categories using the 4-tier system |
+| 4 | Update `host_total_listings_count` with actual counts |
+| 5 | Update `host_category` with imputed values |
+
+**Note:** This imputation uses the dataset's own listing counts, which may differ from global Airbnb host statistics. It provides a reasonable approximation for analysis within this dataset.
+
+### 5. Type Conversions
 - Percentages (`host_acceptance_rate`): string → float (0-1)
 - Booleans (`host_is_superhost`, `instant_bookable`): 't'/'f' → True/False
 - Price: `$1,234.00` → 1234.0
 - Dates: string → datetime
 - Categories: `neighbourhood_cleansed`, `property_type`, `room_type`
 
-### 5. Feature Engineering
+### 6. Feature Engineering
 
 #### Host Classification
 - **host_category**: Categorizes hosts by total listing count (4-tier system)

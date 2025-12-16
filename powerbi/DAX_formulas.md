@@ -22,7 +22,7 @@ DIVIDE([Total Listings], [Total Listings (All Data)], 0)
 
 ---
 
-## Table: `listings_geographic_temporal`
+## Table: `listings_regular_license`
 
 ### Basic Counts
 
@@ -30,7 +30,7 @@ DIVIDE([Total Listings], [Total Listings (All Data)], 0)
 
 ```dax
 Total Listings = 
-COUNTROWS(listings_geographic_temporal)
+COUNTROWS(listings_regular_license)
 ```
 
 ---
@@ -41,28 +41,28 @@ COUNTROWS(listings_geographic_temporal)
 
 ```dax
 Avg Revenue = 
-AVERAGE(listings_geographic_temporal[estimated_revenue_l365d])
+AVERAGE(listings_regular_license[estimated_revenue_l365d])
 ```
 
 #### Median Revenue
 
 ```dax
 Median Revenue = 
-MEDIAN(listings_geographic_temporal[estimated_revenue_l365d])
+MEDIAN(listings_regular_license[estimated_revenue_l365d])
 ```
 
 #### Avg Price
 
 ```dax
 Avg Price = 
-AVERAGE(listings_geographic_temporal[price])
+AVERAGE(listings_regular_license[price])
 ```
 
 #### Median Price
 
 ```dax
 Median Price = 
-MEDIAN(listings_geographic_temporal[price])
+MEDIAN(listings_regular_license[price])
 ```
 
 ---
@@ -74,8 +74,8 @@ MEDIAN(listings_geographic_temporal[price])
 ```dax
 Superhost Count = 
 CALCULATE(
-    COUNTROWS(listings_geographic_temporal),
-    listings_geographic_temporal[is_superhost] = TRUE
+    COUNTROWS(listings_regular_license),
+    listings_regular_license[is_superhost] = TRUE
 )
 ```
 
@@ -95,8 +95,8 @@ DIVIDE(
 ```dax
 Multi-Host Count = 
 CALCULATE(
-    COUNTROWS(listings_geographic_temporal),
-    listings_geographic_temporal[host_category] = "Large Multi (11+)"
+    COUNTROWS(listings_regular_license),
+    listings_regular_license[host_category] = "Large Multi (11+)"
 )
 ```
 
@@ -117,15 +117,15 @@ DIVIDE(
 Superhost Premium Individual = 
 VAR SuperhostRevenue = 
     CALCULATE(
-        AVERAGE(listings_geographic_temporal[estimated_revenue_l365d]),
-        listings_geographic_temporal[host_category] = "Individual (1)",
-        listings_geographic_temporal[is_superhost] = TRUE
+        AVERAGE(listings_regular_license[estimated_revenue_l365d]),
+        listings_regular_license[host_category] = "Individual (1)",
+        listings_regular_license[is_superhost] = TRUE
     )
 VAR NonSuperhostRevenue = 
     CALCULATE(
-        AVERAGE(listings_geographic_temporal[estimated_revenue_l365d]),
-        listings_geographic_temporal[host_category] = "Individual (1)",
-        listings_geographic_temporal[is_superhost] = FALSE
+        AVERAGE(listings_regular_license[estimated_revenue_l365d]),
+        listings_regular_license[host_category] = "Individual (1)",
+        listings_regular_license[is_superhost] = FALSE
     )
 RETURN 
     DIVIDE(SuperhostRevenue, NonSuperhostRevenue, 0)
@@ -145,12 +145,12 @@ Sweet Spot Superhost Rate =
 CALCULATE(
     DIVIDE(
         CALCULATE(
-            COUNTROWS(listings_geographic_temporal),
-            listings_geographic_temporal[host_is_superhost] = TRUE
+            COUNTROWS(listings_regular_license),
+            listings_regular_license[host_is_superhost] = TRUE
         ),
-        COUNTROWS(listings_geographic_temporal)
+        COUNTROWS(listings_regular_license)
     ),
-    listings_geographic_temporal[host_category] = "Small Multi (2-3)"
+    listings_regular_license[host_category] = "Small Multi (2-3)"
 )
 ```
 
@@ -159,9 +159,9 @@ CALCULATE(
 ```dax
 Large Multi Non-SH Rating = 
 CALCULATE(
-    AVERAGE(listings_geographic_temporal[review_scores_rating]),
-    listings_geographic_temporal[host_category] = "Large Multi (11+)",
-    listings_geographic_temporal[host_is_superhost] = FALSE
+    AVERAGE(listings_regular_license[review_scores_rating]),
+    listings_regular_license[host_category] = "Large Multi (11+)",
+    listings_regular_license[host_is_superhost] = FALSE
 )
 ```
 
@@ -175,15 +175,15 @@ CALCULATE(
 Revenue Multiplier Small Multi = 
 VAR SH = 
     CALCULATE(
-        AVERAGE(listings_geographic_temporal[estimated_revenue_l365d]),
-        listings_geographic_temporal[host_category] = "Small Multi (2-3)",
-        listings_geographic_temporal[host_is_superhost] = TRUE
+        AVERAGE(listings_regular_license[estimated_revenue_l365d]),
+        listings_regular_license[host_category] = "Small Multi (2-3)",
+        listings_regular_license[host_is_superhost] = TRUE
     )
 VAR NonSH = 
     CALCULATE(
-        AVERAGE(listings_geographic_temporal[estimated_revenue_l365d]),
-        listings_geographic_temporal[host_category] = "Small Multi (2-3)",
-        listings_geographic_temporal[host_is_superhost] = FALSE
+        AVERAGE(listings_regular_license[estimated_revenue_l365d]),
+        listings_regular_license[host_category] = "Small Multi (2-3)",
+        listings_regular_license[host_is_superhost] = FALSE
     )
 RETURN 
     DIVIDE(SH, NonSH, 0)
@@ -195,15 +195,15 @@ RETURN
 Revenue Multiplier Large Multi = 
 VAR SH = 
     CALCULATE(
-        AVERAGE(listings_geographic_temporal[estimated_revenue_l365d]),
-        listings_geographic_temporal[host_category] = "Large Multi (11+)",
-        listings_geographic_temporal[host_is_superhost] = TRUE
+        AVERAGE(listings_regular_license[estimated_revenue_l365d]),
+        listings_regular_license[host_category] = "Large Multi (11+)",
+        listings_regular_license[host_is_superhost] = TRUE
     )
 VAR NonSH = 
     CALCULATE(
-        AVERAGE(listings_geographic_temporal[estimated_revenue_l365d]),
-        listings_geographic_temporal[host_category] = "Large Multi (11+)",
-        listings_geographic_temporal[host_is_superhost] = FALSE
+        AVERAGE(listings_regular_license[estimated_revenue_l365d]),
+        listings_regular_license[host_category] = "Large Multi (11+)",
+        listings_regular_license[host_is_superhost] = FALSE
     )
 RETURN 
     DIVIDE(SH, NonSH, 0)
@@ -218,8 +218,8 @@ RETURN
 ```dax
 Listings by Neighborhood = 
 CALCULATE(
-    COUNTROWS(listings_geographic_temporal),
-    ALLEXCEPT(listings_geographic_temporal, listings_geographic_temporal[neighbourhood_cleansed])
+    COUNTROWS(listings_regular_license),
+    ALLEXCEPT(listings_regular_license, listings_regular_license[neighbourhood_cleansed])
 )
 ```
 
@@ -228,8 +228,8 @@ CALCULATE(
 ```dax
 Avg Price by Neighborhood = 
 CALCULATE(
-    AVERAGE(listings_geographic_temporal[price]),
-    ALLEXCEPT(listings_geographic_temporal, listings_geographic_temporal[neighbourhood_cleansed])
+    AVERAGE(listings_regular_license[price]),
+    ALLEXCEPT(listings_regular_license, listings_regular_license[neighbourhood_cleansed])
 )
 ```
 
@@ -240,12 +240,12 @@ Multi-Host Downtown Percentage =
 CALCULATE(
     DIVIDE(
         CALCULATE(
-            COUNTROWS(listings_geographic_temporal),
-            listings_geographic_temporal[host_category] = "Large Multi (11+)"
+            COUNTROWS(listings_regular_license),
+            listings_regular_license[host_category] = "Large Multi (11+)"
         ),
-        COUNTROWS(listings_geographic_temporal)
+        COUNTROWS(listings_regular_license)
     ),
-    listings_geographic_temporal[distance_cat] = "Downtown (<1km)"
+    listings_regular_license[distance_cat] = "Downtown (<1km)"
 )
 ```
 
@@ -256,12 +256,12 @@ Multi-Host Neighborhoods Percentage =
 CALCULATE(
     DIVIDE(
         CALCULATE(
-            COUNTROWS(listings_geographic_temporal),
-            listings_geographic_temporal[host_category] = "Large Multi (11+)"
+            COUNTROWS(listings_regular_license),
+            listings_regular_license[host_category] = "Large Multi (11+)"
         ),
-        COUNTROWS(listings_geographic_temporal)
+        COUNTROWS(listings_regular_license)
     ),
-    listings_geographic_temporal[distance_cat] = "Neighborhoods (3-6km)"
+    listings_regular_license[distance_cat] = "Neighborhoods (3-6km)"
 )
 ```
 
@@ -269,18 +269,18 @@ CALCULATE(
 
 ```dax
 Host Category Distribution = 
-VAR CurrentLocation = SELECTEDVALUE(listings_geographic_temporal[distance_cat])
-VAR CurrentHostCat = SELECTEDVALUE(listings_geographic_temporal[host_category])
+VAR CurrentLocation = SELECTEDVALUE(listings_regular_license[distance_cat])
+VAR CurrentHostCat = SELECTEDVALUE(listings_regular_license[host_category])
 VAR CountInCategory = 
     CALCULATE(
-        COUNTROWS(listings_geographic_temporal),
-        listings_geographic_temporal[distance_cat] = CurrentLocation,
-        listings_geographic_temporal[host_category] = CurrentHostCat
+        COUNTROWS(listings_regular_license),
+        listings_regular_license[distance_cat] = CurrentLocation,
+        listings_regular_license[host_category] = CurrentHostCat
     )
 VAR TotalInLocation = 
     CALCULATE(
-        COUNTROWS(listings_geographic_temporal),
-        listings_geographic_temporal[distance_cat] = CurrentLocation
+        COUNTROWS(listings_regular_license),
+        listings_regular_license[distance_cat] = CurrentLocation
     )
 RETURN
     DIVIDE(CountInCategory, TotalInLocation, 0)
@@ -294,7 +294,7 @@ RETURN
 
 ```dax
 Median Listing Age = 
-MEDIAN(listings_geographic_temporal[listing_age_years])
+MEDIAN(listings_regular_license[listing_age_years])
 ```
 
 #### Quality Decline Percentage
@@ -303,15 +303,15 @@ MEDIAN(listings_geographic_temporal[listing_age_years])
 Quality Decline Percentage = 
 VAR Pre2022Rating = 
     CALCULATE(
-        AVERAGE(listings_geographic_temporal[review_scores_rating]),
-        listings_geographic_temporal[host_category] = "Large Multi (11+)",
-        YEAR(listings_geographic_temporal[first_review_date]) <= 2022
+        AVERAGE(listings_regular_license[review_scores_rating]),
+        listings_regular_license[host_category] = "Large Multi (11+)",
+        YEAR(listings_regular_license[first_review_date]) <= 2022
     )
 VAR Post2023Rating = 
     CALCULATE(
-        AVERAGE(listings_geographic_temporal[review_scores_rating]),
-        listings_geographic_temporal[host_category] = "Large Multi (11+)",
-        YEAR(listings_geographic_temporal[first_review_date]) >= 2023
+        AVERAGE(listings_regular_license[review_scores_rating]),
+        listings_regular_license[host_category] = "Large Multi (11+)",
+        YEAR(listings_regular_license[first_review_date]) >= 2023
     )
 VAR Decline = Post2023Rating - Pre2022Rating
 RETURN 
@@ -324,17 +324,17 @@ RETURN
 Budget Segment Quality Decline = 
 VAR Pre2022 = 
     CALCULATE(
-        AVERAGE(listings_geographic_temporal[review_scores_rating]),
-        listings_geographic_temporal[host_category] = "Large Multi (11+)",
-        listings_geographic_temporal[price_cat] = "Very Low (<40€)",
-        YEAR(listings_geographic_temporal[first_review]) <= 2022
+        AVERAGE(listings_regular_license[review_scores_rating]),
+        listings_regular_license[host_category] = "Large Multi (11+)",
+        listings_regular_license[price_cat] = "Very Low (<40€)",
+        YEAR(listings_regular_license[first_review]) <= 2022
     )
 VAR Post2023 = 
     CALCULATE(
-        AVERAGE(listings_geographic_temporal[review_scores_rating]),
-        listings_geographic_temporal[host_category] = "Large Multi (11+)",
-        listings_geographic_temporal[price_cat] = "Very Low (<40€)",
-        YEAR(listings_geographic_temporal[first_review]) >= 2023
+        AVERAGE(listings_regular_license[review_scores_rating]),
+        listings_regular_license[host_category] = "Large Multi (11+)",
+        listings_regular_license[price_cat] = "Very Low (<40€)",
+        YEAR(listings_regular_license[first_review]) >= 2023
     )
 RETURN 
     DIVIDE(Post2023 - Pre2022, Pre2022, 0)
@@ -344,15 +344,15 @@ RETURN
 
 ```dax
 Avg Rating by Cohort = 
-VAR CurrentYear = SELECTEDVALUE(listings_geographic_temporal[first_review_date])
-VAR CurrentHostCat = SELECTEDVALUE(listings_geographic_temporal[host_category])
-VAR CurrentPriceCat = SELECTEDVALUE(listings_geographic_temporal[price_cat])
+VAR CurrentYear = SELECTEDVALUE(listings_regular_license[first_review_date])
+VAR CurrentHostCat = SELECTEDVALUE(listings_regular_license[host_category])
+VAR CurrentPriceCat = SELECTEDVALUE(listings_regular_license[price_cat])
 RETURN
     CALCULATE(
-        AVERAGE(listings_geographic_temporal[review_scores_rating]),
-        YEAR(listings_geographic_temporal[first_review_date]) = CurrentYear,
-        listings_geographic_temporal[host_category] = CurrentHostCat,
-        listings_geographic_temporal[price_cat] = CurrentPriceCat
+        AVERAGE(listings_regular_license[review_scores_rating]),
+        YEAR(listings_regular_license[first_review_date]) = CurrentYear,
+        listings_regular_license[host_category] = CurrentHostCat,
+        listings_regular_license[price_cat] = CurrentPriceCat
     )
 ```
 

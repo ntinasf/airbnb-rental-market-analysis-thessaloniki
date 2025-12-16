@@ -152,6 +152,7 @@ def anonymize_coordinates(df, lat_col="latitude", lon_col="longitude", precision
 
     return lat_anon, lon_anon
 
+
 # License anonymization function
 def anonymize_license(series):
     """
@@ -205,6 +206,7 @@ def anonymize_license(series):
 
     return anonymized
 
+
 # Reporting function
 def print_processing_report(original_df, processed_df, columns_dropped, stats):
     """Print concise report of data transformations."""
@@ -223,9 +225,15 @@ def print_processing_report(original_df, processed_df, columns_dropped, stats):
         print(f"      - Extreme minimum_nights: {stats['extreme_min_nights']:,}")
         print(f"      - High outlier prices: {stats['high_price_outliers']:,}")
         print(f"      - Incomplete/inactive: {stats['incomplete_inactive']:,}")
-        print(f"      - Dead listings (zero activity + no reviews): {stats['dead_listings']:,}")
+        print(
+            f"      - Dead listings (zero activity + no reviews): {stats['dead_listings']:,}"
+        )
 
-    print("\n🔒 Anonymization:")
+    print("\n� Missing Value Imputation:")
+    print(f"   host_category imputed: {stats['host_category_imputed']:,} listings")
+    print(f"   Unique hosts affected: {stats['hosts_imputed']:,}")
+
+    print("\n�🔒 Anonymization:")
     print(f"   Listing IDs: {stats['ids_anonymized']:,}")
     print(f"   Host IDs: {stats['host_ids_anonymized']:,}")
     print(f"   Names: {stats['names_anonymized']:,}")
@@ -438,6 +446,10 @@ if __name__ == "__main__":
         "total_removed": len(indices_to_remove),
     }
 
+    # Initialize imputation tracking (will be updated later)
+    imputed_count = 0
+    imputed_hosts = 0
+
     # Remove problematic entries
     listings.drop(index=indices_to_remove, inplace=True)
 
@@ -458,33 +470,84 @@ if __name__ == "__main__":
         else:
             return "Large Multi (11+)"
 
-    listings["host_category"] = listings["host_total_listings_count"].apply(categorize_host_count)
+    listings["host_category"] = listings["host_total_listings_count"].apply(
+        categorize_host_count
+    )
+
+    # ========== MISSING VALUE IMPUTATION: host_category ==========
+    # Some listings have missing host_total_listings_count but we can infer
+    # the count from how many listings each host has in our dataset
+
+    unknown_mask = listings["host_category"] == "Unknown"
+    unknown_host_ids = listings.loc[unknown_mask, "host_id"].unique()
+
+    if len(unknown_host_ids) > 0:
+        # Count actual listings per host in our dataset
+        host_counts = listings.loc[
+            listings["host_id"].isin(unknown_host_ids), "host_id"
+        ].value_counts()
+
+        # Create category mapping from actual counts
+        host_category_map = host_counts.apply(categorize_host_count)
+
+        # Impute host_total_listings_count with actual counts
+        host_listings_count_map = host_counts.to_dict()
+        listings.loc[unknown_mask, "host_total_listings_count"] = listings.loc[
+            unknown_mask, "host_id"
+        ].map(host_listings_count_map)
+
+        # Update host_category with imputed values
+        listings["host_category"] = (
+            listings["host_id"].map(host_category_map).fillna(listings["host_category"])
+        )
+
+        imputed_count = unknown_mask.sum()
+        imputed_hosts = len(unknown_host_ids)
+    else:
+        imputed_count = 0
+        imputed_hosts = 0
+
+    # ========== END MISSING VALUE IMPUTATION ==========
 
     # Geographic features: Distance from city center
     from geopy.distance import geodesic
 
-    landmark_coords = (40.62962, 22.94473)  # Midpoint: White Tower / Aristotelous Square
+    landmark_coords = (
+        40.62962,
+        22.94473,
+    )  # Midpoint: White Tower / Aristotelous Square
 
     listings["distance_to_center_km"] = listings.apply(
-        lambda row: geodesic(
-            (row["latitude"], row["longitude"]), landmark_coords
-        ).km
-        if pd.notna(row["latitude"]) and pd.notna(row["longitude"])
-        else np.nan,
+        lambda row: (
+            geodesic((row["latitude"], row["longitude"]), landmark_coords).km
+            if pd.notna(row["latitude"]) and pd.notna(row["longitude"])
+            else np.nan
+        ),
         axis=1,
     )
 
     listings["distance_cat"] = pd.cut(
         listings["distance_to_center_km"],
         bins=[0, 1, 3, 6, 100],
-        labels=["Downtown (<1km)", "Inner City (1-3km)", "Neighborhoods (3-6km)", "Suburban (>6km)"],
+        labels=[
+            "Downtown (<1km)",
+            "Inner City (1-3km)",
+            "Neighborhoods (3-6km)",
+            "Suburban (>6km)",
+        ],
     )
 
     # Price categories
     listings["price_cat"] = pd.cut(
         listings["price"],
         bins=[0, 40, 60, 80, 120, np.inf],
-        labels=["Very Low (<40€)", "Low (40-60€)", "Medium (60-80€)", "High (80-120€)", "Very High (>120€)"],
+        labels=[
+            "Very Low (<40€)",
+            "Low (40-60€)",
+            "Medium (60-80€)",
+            "High (80-120€)",
+            "Very High (>120€)",
+        ],
     )
 
     # Temporal features: Listing age and market maturity
@@ -500,7 +563,12 @@ if __name__ == "__main__":
     listings["market_maturity"] = pd.cut(
         listings["listing_age_years"],
         bins=[-1, 2, 4, 8, 100],
-        labels=["New (<2yr)", "Growing (2-4yr)", "Mature (4-8yr)", "Established (>8yr)"],
+        labels=[
+            "New (<2yr)",
+            "Growing (2-4yr)",
+            "Mature (4-8yr)",
+            "Established (>8yr)",
+        ],
     )
 
     # ========== END FEATURE ENGINEERING ==========
@@ -533,6 +601,8 @@ if __name__ == "__main__":
         "high_price_outliers": removed_stats["high_price_outliers"],
         "incomplete_inactive": removed_stats["incomplete_inactive"],
         "dead_listings": removed_stats["dead_listings"],
+        "host_category_imputed": imputed_count,
+        "hosts_imputed": imputed_hosts,
         "ids_anonymized": listings["id"].notna().sum(),
         "host_ids_anonymized": listings["host_id"].notna().sum(),
         "names_anonymized": listings["name"].notna().sum(),
