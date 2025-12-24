@@ -1,274 +1,159 @@
-# Thessaloniki Airbnb Market Analysis
-### Evidence-Based Policy Recommendations for Sustainable Tourism Growth
+# Thessaloniki Short-Term Rental Market Analysis
 
-[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![Power BI](https://img.shields.io/badge/Power%20BI-Dashboard-yellow.svg)](link-to-dashboard)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Completed-success.svg)]()
+A data-driven examination of 4,124 Airbnb listings to inform sustainable tourism policy.
+
+![Placeholder: Dashboard Overview](pictures/dashboard_overview.png)
 
 ---
 
-## 📋 Executive Summary
+## Overview
 
-Using 4,700+ Airbnb listings, this project analyzes Thessaloniki's short-term rental market to provide data-driven policy recommendations for sustainable tourism growth. Through rigorous analytical methodology — including ANOVA testing, effect size calculations, and data quality validation — we identified critical patterns in regulatory compliance, host ecosystem dynamics, and market quality trends. 
-All sensitive data has been anonymized for public portfolio presentation.
+Thessaloniki's short-term rental market has grown rapidly in recent years. This project analyzes regulatory compliance, host ecosystem dynamics, geographic performance patterns, and temporal quality trends to provide evidence-based policy recommendations.
 
-### Key Findings
+**Key question:** Is the market healthy, and where should policymakers focus attention?
 
-| Finding | Metric | Policy Implication |
-|---------|--------|-------------------|
-| **License Concentration Risk** | Single host controls 29.3% of exemptions | Reform exemption system |
-| **Superhost Quality Premium** | 3.8x revenue advantage for Individual hosts | Incentivize quality certification |
-| **Geographic Stratification** | 60% commercial operators downtown vs 27% in neighborhoods | Preserve neighborhood diversity |
-| **Budget Segment Crisis** | -3.84% quality decline, Large Multi share 43%→62% | Urgent quality standards needed |
+**Short answer:** Mostly yes, with caveats worth monitoring.
 
 ---
 
-## 🎯 Business Problem
+## Key Findings
 
-**Primary Research Question:**
-> How can Thessaloniki optimize its short-term rental ecosystem to maximize tourism benefits while ensuring neighborhood sustainability and regulatory compliance?
+| Dimension | Finding | Effect Size |
+|-----------|---------|-------------|
+| Compliance | 97.3% licensing rate; 2 hosts control 42% of exemptions | - |
+| Host Quality | 0.27-star gap between Individual (4.90) and Large Multi (4.70) hosts | ε² = 0.12 |
+| Superhost Premium | 3.2x revenue multiplier for individuals vs 1.7x for large operators | Large effect |
+| Geography | 86% of listings within 3km of center; downtown elevates quality | ε² = 0.19 (location ratings) |
+| Trajectory | Large Multi hosts doubled market share post-pandemic (25% to 43%) | - |
+| Quality Variance | New listings show 2.4x rating variance vs established ones | p < 0.001 |
 
-**Stakeholders:** Tourism Development Authority, City Council, Host Community, Residents
-
-**Analysis Scope:** 4,379 regular licensed listings (March 2025 data)
+Mid-scale operators (2-10 listings) emerge as the market's quality backbone with highest superhost rates (45-47%).
 
 ---
 
-## 📊 Methodology
-
-### Analytical Framework
+## Project Structure
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    RESEARCH DESIGN                          │
-├─────────────────────────────────────────────────────────────┤
-│  H1: Regulatory Compliance                                  │
-│      └─ License concentration & duplicate patterns          │
-│                                                             │
-│  H3: Host Ecosystem Dynamics                                │
-│      └─ Quality premium analysis (Superhost × Host Type)    │
-│                                                             │
-│  H5: Geographic & Temporal Stratification                   │
-│      └─ Spatial patterns + Quality evolution trends         │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### Statistical Methods
-
-| Hypothesis | Method | Key Statistic |
-|------------|--------|---------------|
-| H1 | Descriptive Analysis, Concentration Metrics | Top-host share: 29.3% |
-| H3 | Two-way ANOVA, Post-hoc Tukey HSD | F(5,4373) = 89.2, p < 0.001 |
-| H5 | Chi-square, Cramér's V, Temporal Regression | χ²(6) = 89.1, V = 0.142 |
-
-### Tools & Technologies
-
-- **Data Processing:** Python 3.9+ (pandas, numpy)
-- **Statistical Analysis:** scipy, statsmodels
-- **Visualization:** matplotlib, seaborn, plotly
-- **Dashboard:** Microsoft Power BI
-- **Version Control:** Git/GitHub
-
----
-
-## 📁 Repository Structure
-
-```
-thessaloniki-airbnb-analysis/
+airbnb-rental-market-analysis-thessaloniki/
 │
-├── 📂 data/
-│   ├── raw/                    # Original datasets (not tracked)
-│   ├── processed/              # Cleaned analysis-ready data
-│   └── data_dictionary.md      # Variable definitions
+├── data/
+│   ├── raw/                      # Original Inside Airbnb data
+│   └── processed/                # Cleaned analysis-ready datasets
 │
-├── 📂 notebooks/
-│   ├── 01_data_preparation.ipynb
-│   ├── 02_exploratory_analysis.ipynb
-│   ├── 03_hypothesis_testing.ipynb
-│   └── 04_insights_synthesis.ipynb
+├── notebooks/
+│   ├── regulatory_compliance.ipynb
+│   ├── host_type_impact.ipynb
+│   ├── geographic_performance.ipynb
+│   └── temporal_dynamics.ipynb
 │
-├── 📂 src/
-│   ├── data_processing.py      # Data cleaning functions
-│   ├── analysis_utils.py       # Statistical test helpers
-│   └── visualization.py        # Custom plotting functions
+├── scripts/
+│   ├── data_preprocessing.py
+│   ├── calendar_preprocessing.py
+│   └── eda_functions.py
 │
-├── 📂 reports/
-│   ├── executive_summary.pdf
-│   ├── technical_report.pdf
-│   └── presentation_slides.pdf
+├── powerbi/
+│   └── DAX_formulas.md
 │
-├── 📂 dashboard/
-│   ├── thessaloniki_airbnb.pbix
-│   └── screenshots/
+├── pictures/                     # Visualizations for README and reports
 │
-├── 📂 docs/
-│   ├── methodology.md
-│   └── data_sources.md
-│
+├── report.md                     # Full analytical report
+├── executive_summary.md          # Policy brief
 ├── requirements.txt
-├── README.md
-└── LICENSE
+└── README.md
 ```
 
 ---
 
-## 🚀 Quick Start
+## Methodology
 
-### Prerequisites
+**Data Source:** Inside Airbnb (June 2025 snapshot)
 
-- Python 3.9 or higher
-- Power BI Desktop (for dashboard)
-- Git
+**Sample:** 4,124 licensed listings after compliance filtering
 
-### Installation
+**Statistical Approach:**
+- Non-parametric tests (Kruskal-Wallis, Mann-Whitney U) for group comparisons
+- Effect size reporting (ε², Cramer's V, rank-biserial correlation)
+- Levene's test for variance homogeneity
+
+**Geographic Reference:** White Tower / Aristotelous Square midpoint (40.62962°N, 22.94473°E)
+
+**Host Categorization:**
+| Category | Listings | Profile |
+|----------|----------|---------|
+| Individual | 1 | Casual hosts |
+| Small Multi | 2-3 | Semi-professional |
+| Medium Multi | 4-10 | Professional operators |
+| Large Multi | 11+ | Commercial operations |
+
+---
+
+## Visualizations
+
+### Host Ecosystem
+![Placeholder: Review Scores by Host Type](pictures/review_scores_host_type.png)
+
+### Geographic Patterns
+![Placeholder: Superhost Rate by Zone](pictures/superhost_by_zone.png)
+
+### Temporal Dynamics
+![Placeholder: Quality Variance by Market Maturity](pictures/quality_variance_maturity.png)
+
+---
+
+## Reports
+
+| Document | Description |
+|----------|-------------|
+| [Full Report](report.md) | Detailed analysis with statistical findings |
+| [Executive Summary](executive_summary.md) | Policy brief with recommendations |
+| [Power BI Dashboard](powerbi/) | Interactive exploration |
+
+---
+
+## Quick Start
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/thessaloniki-airbnb-analysis.git
-cd thessaloniki-airbnb-analysis
+# Clone repository
+git clone https://github.com/[username]/airbnb-rental-market-analysis-thessaloniki.git
+cd airbnb-rental-market-analysis-thessaloniki
 
-# Create virtual environment
+# Create environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
-```
 
-### Reproduce Analysis
-
-```bash
-# Run notebooks in sequence
-jupyter notebook notebooks/01_data_preparation.ipynb
-# Continue with 02, 03, 04...
-
-# Or run all preprocessing
-python src/data_processing.py
+# Run notebooks
+jupyter notebook notebooks/
 ```
 
 ---
 
-## 📈 Key Visualizations
+## Data Sources
 
-### Dashboard Overview
-![Dashboard Overview](dashboard/screenshots/overview.png)
+| Dataset | Source | Records |
+|---------|--------|---------|
+| Listings | [Inside Airbnb](http://insideairbnb.com/) | 4,700+ |
+| Calendar | Inside Airbnb | ~1.7M rows |
+| Neighbourhoods | Inside Airbnb | GeoJSON |
 
-### Superhost Premium Analysis
-![Superhost Premium](dashboard/screenshots/host_ecosystem.png)
-
-### Quality Decline Trend
-![Quality Decline](dashboard/screenshots/market_evolution.png)
-
-*Full interactive dashboard available in Power BI file*
+All data publicly available. Analysis conducted on June 2025 snapshot.
 
 ---
 
-## 📊 Data Sources
-
-| Dataset | Source | Records | Date |
-|---------|--------|---------|------|
-| Listings | [Inside Airbnb](http://insideairbnb.com/) | 4,817 | March 2025 |
-| Calendar | Inside Airbnb | ~1.7M | March 2025 |
-| Reviews | Inside Airbnb | ~150K | March 2025 |
-
-**Data Ethics:** All data is publicly available. Personal information has been anonymized for this analysis.
-
----
-
-## 📋 Requirements
-
-```
-pandas>=1.5.0
-numpy>=1.23.0
-scipy>=1.9.0
-statsmodels>=0.13.0
-matplotlib>=3.6.0
-seaborn>=0.12.0
-plotly>=5.10.0
-jupyter>=1.0.0
-```
-
----
-
-## 🔍 Detailed Findings
-
-### H1: Regulatory Compliance
-
-**Finding:** High overall compliance (90.9%) masks concentration risk in exemptions.
-
-- Single host controls 29.3% of all license exemptions (12 of 41 properties)
-- 411 listings operate under duplicate license arrangements
-- Geographic clustering suggests coordinated regulatory arbitrage
-
-**Recommendation:** Limit exemptions to 2 properties per host; audit duplicate licenses.
-
-### H3: Host Ecosystem Dynamics
-
-**Finding:** Quality certification (Superhost) yields dramatically different returns by operator type.
-
-- Individual hosts: 3.8x revenue premium with Superhost status
-- Large Multi operators: Only 1.4x premium
-- "Sweet spot" at 2-3 properties: 42% Superhost rate (highest)
-
-**Recommendation:** Incentivize Superhost attainment, especially for multi-property operators.
-
-### H5: Geographic & Temporal Patterns
-
-**Finding:** Market commercialization correlates with quality degradation.
-
-- Downtown: 60% multi-property operators (highest concentration)
-- Budget segment: Large Multi share grew 43%→62% while ratings fell 3.84%
-- Causal pattern: Commercialization without quality oversight = market failure
-
-**Recommendation:** Implement geographic diversity requirements; urgent quality standards for budget segment.
-
----
-
-## 📄 Deliverables
-
-| Deliverable | Description | Link |
-|-------------|-------------|------|
-| **Power BI Dashboard** | Interactive 5-page analytics dashboard | [View](dashboard/) |
-| **Executive Summary** | 4-page policy brief for Tourism Authority | [PDF](reports/executive_summary.pdf) |
-| **Technical Report** | Full methodology and statistical analysis | [PDF](reports/technical_report.pdf) |
-| **Presentation** | Stakeholder presentation slides | [PDF](reports/presentation_slides.pdf) |
-
----
-
-## 🛠️ Future Work
-
-- [ ] Incorporate review text sentiment analysis
-- [ ] Build predictive model for listing success factors
-- [ ] Expand to comparative analysis with similar Greek cities
-- [ ] Develop automated monitoring dashboard for ongoing tracking
-
----
-
-## 👤 Author
+## Author
 
 **[Your Name]**
 
-- Portfolio: [yourwebsite.com](https://yourwebsite.com)
-- LinkedIn: [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)
-- Email: your.email@example.com
+[Portfolio](https://yourwebsite.com) | [LinkedIn](https://linkedin.com/in/yourprofile)
 
 ---
 
-## 📜 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- [Inside Airbnb](http://insideairbnb.com/) for open data initiative
-- Thessaloniki Tourism Development Authority (simulated client)
-- [Google's Good Data Analysis Practices](https://research.google/pubs/) for methodology guidance
+MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-<p align="center">
-  <i>This project was completed as a portfolio demonstration of data analytics capabilities.</i>
-</p>
+*This project was developed as a data analytics portfolio demonstration.*

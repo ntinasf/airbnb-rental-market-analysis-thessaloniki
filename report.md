@@ -1,0 +1,319 @@
+# Thessaloniki's Short-Term Rental Market: A Data-Driven Analysis
+
+*An evidence-based examination of 4,124 Airbnb listings to inform sustainable tourism policy*
+
+---
+
+## The Story in Numbers
+
+Thessaloniki—Greece's second city, a UNESCO-recognized cultural hub, and an increasingly popular destination for digital nomads—has experienced a short-term rental boom. But behind the Instagram-worthy White Tower photos lies a more complex story about who's running the city's tourism infrastructure, where the money flows, and whether rapid growth is coming at the cost of guest experience.
+
+This analysis examines **4,124 licensed Airbnb listings** to answer a simple question: *Is Thessaloniki's STR market healthy?*
+
+The short answer: mostly yes, with caveats worth noting.
+
+---
+
+## Before We Begin: The Compliance Question
+
+Before analyzing market dynamics, we needed to establish a clean dataset. Thessaloniki's regulatory framework requires property registration (AMA number) for short-term rentals, with exemptions available for specific property categories.
+
+**The good news**: 97.3% of active listings hold valid licenses—a compliance rate that would make most European cities envious.
+
+**The less good news**: The exemption system shows signs of concentration that warrant scrutiny.
+
+![Placeholder: Distribution of License Types]
+
+| License Status | Listings | Share |
+|---------------|----------|-------|
+| Regular Licensed | 4,124 | 97.3% |
+| Exempt | [X] | [X]% |
+| Unlicensed/NA | 115 | 2.7% |
+
+Among exempt listings, **two hosts control 42% of all exemptions**—a concentration that raises questions about whether exemption criteria are being applied consistently. Additionally, 6 licenses appear across multiple hosts at different locations, suggesting potential license-sharing irregularities.
+
+![Placeholder: Concentration of Exempt Listings by Host]
+
+**For auditors**: The 115 non-compliant listings were excluded from further analysis. Of these, only 4 appear actively operational—the rest seem to be deactivated or dormant properties. Focus compliance efforts accordingly.
+
+With the regulatory landscape mapped, we turn to the 4,124 legitimate operators who form the backbone of Thessaloniki's tourism accommodation sector.
+
+---
+
+## Who Runs Thessaloniki's Airbnb Market?
+
+The answer is more nuanced than you might expect.
+
+### A Tale of Two Markets
+
+Thessaloniki's STR market operates on two parallel tracks: a fragmented base of individual hosts and a concentrated tier of commercial operators.
+
+![Placeholder: Distribution of Listings by Host Category]
+
+| Host Category | Listings | Market Share | Profile |
+|--------------|----------|--------------|---------|
+| **Individual** (1 listing) | 1,003 | 24% | Casual hosts, often personal space |
+| **Small Multi** (2-3 listings) | 765 | 19% | Semi-professional, growing portfolio |
+| **Medium Multi** (4-10 listings) | 780 | 19% | Professional operators |
+| **Large Multi** (11+ listings) | 1,576 | 38% | Commercial/corporate operations |
+
+The math is stark: while most *hosts* are small operators, most *listings* belong to commercial players. A single operator controls nearly **7% of Thessaloniki's entire Airbnb inventory**. The boxplot reveals extreme outliers—some hosts manage portfolios spanning 200-1,000+ properties globally.
+
+![Placeholder: Distribution of Host Total Listings Count]
+
+This isn't inherently problematic. Professional operators can bring efficiency, consistent standards, and tourism infrastructure to markets that need it. The question is whether scale delivers value to guests—or extracts it.
+
+### The Scale Paradox: Bigger ≠ Better
+
+Here's where conventional wisdom breaks down.
+
+**Revenue per listing**? Essentially identical across host categories. Median annual revenue ranges from €1,980 (Medium Multi) to €2,688 (Large Multi)—statistically significant but practically meaningless (ε² = 0.007, negligible effect).
+
+![Placeholder: Estimated Revenue Across Host Categories]
+
+**Occupancy rates**? Same story. Despite statistical significance (p < 0.001), the effect size (ε² = 0.006) suggests scale provides zero competitive advantage in filling beds.
+
+![Placeholder: Estimated Occupancy Across Host Categories]
+
+You'd expect professional operators to outperform through pricing algorithms, aggressive marketing, or operational efficiency. They don't. The market appears genuinely competitive—no structural advantage accrues to scale alone.
+
+But here's where it gets interesting.
+
+### Where Scale Fails: The Quality Gap
+
+Guest satisfaction tells a different story than revenue metrics.
+
+![Placeholder: Review Scores by Host Type]
+
+Review ratings decline systematically as host scale increases:
+
+| Host Category | Median Rating | Variance |
+|--------------|---------------|----------|
+| Individual | 4.90★ | Lowest |
+| Small Multi | 4.83★ | Low |
+| Medium Multi | 4.80★ | Moderate |
+| Large Multi | 4.70★ | Highest |
+
+This isn't noise. Host category explains **12% of variance in review scores** (ε² = 0.12)—a moderate-to-large effect that represents real differences in guest experience. The 0.27-star gap between Individual and Large Multi hosts may seem small, but in Airbnb's rating ecosystem, it's the difference between "excellent" and "good."
+
+The variance finding is equally telling: large operators deliver inconsistent experiences, while individual hosts cluster tightly around high scores.
+
+---
+
+## The Superhost Economy
+
+Airbnb's Superhost badge—awarded for sustained excellence in response rate (>90%), reviews (>4.8★), cancellations (<1%), and booking volume—serves as a useful proxy for quality commitment. Who earns it?
+
+![Placeholder: Superhost Achievement by Host Scale]
+
+| Host Category | Superhost Rate |
+|--------------|----------------|
+| Individual | 39% |
+| Small Multi | 47% |
+| Medium Multi | 45% |
+| Large Multi | 32% |
+
+**Mid-scale operators (2-10 listings) achieve the highest superhost rates**, suggesting a "growth mindset" phase where operators invest in quality to build their business. Large operators, managing 11+ properties, appear to prioritize operational efficiency over personalized service.
+
+### The Superhost Premium: Quality Pays (More for Some)
+
+Does the quality investment pay off? Absolutely—but unevenly.
+
+![Placeholder: Superhost Revenue Premium by Host Category]
+
+| Host Category | Revenue Multiplier (SH vs Non-SH) |
+|--------------|-----------------------------------|
+| Individual | **3.23×** |
+| Small Multi | **3.19×** |
+| Medium Multi | 2.1× |
+| Large Multi | 1.7× |
+
+For individual hosts, Superhost status is a survival strategy—the badge enables competition against commercial scale through reputation. For large operators, the quality premium is diluted. At scale, guests may already expect professionalism; the certification adds less marginal value.
+
+This creates a troubling dynamic: **quality investment is less rewarded at scale**, potentially incentivizing volume-over-excellence strategies among commercial operators.
+
+### The Quality Floor Problem
+
+The data reveals a concerning segment: **non-Superhost Large Multi operators** deliver the market's worst guest experience at **4.42★**—0.37 stars below individual non-superhosts.
+
+![Placeholder: Quality Gap - Superhost vs Non-Superhost by Host Scale]
+
+These operators represent roughly 25% of the market. They're the newest entrants (median 2.1 years), expanding rapidly, and apparently tolerating lower ratings because their business model doesn't require quality leadership.
+
+This isn't just a host problem—it's a destination problem. Visitors who experience subpar stays may not distinguish between "bad operator" and "bad destination."
+
+---
+
+## The Geography of Success
+
+Thessaloniki's STR market isn't uniformly distributed. It clusters dramatically around the tourist core.
+
+### The Concentration Pattern
+
+Distance is measured from the **White Tower / Aristotelous Square midpoint**—the symbolic heart of Thessaloniki's tourism.
+
+![Placeholder: Map of Listings by Distance Zone]
+
+| Zone | Distance | Listings | Share |
+|------|----------|----------|-------|
+| **Downtown** | <1 km | [X] | [X]% |
+| **Inner City** | 1-3 km | [X] | [X]% |
+| **Neighborhoods** | 3-6 km | [X] | [X]% |
+| **Suburban** | >6 km | 91 | 2.2% |
+
+**86% of listings fall within 3km of the White Tower**. The median listing sits 1.24km from center—walkable to major attractions. Suburban presence is negligible, limiting statistical power for that segment.
+
+### Professional Hosts Follow the Money
+
+Large Multi operators systematically target prime locations—a rational strategy that concentrates commercial activity downtown.
+
+![Placeholder: Host Category Distribution by Distance Zone]
+
+| Zone | Large Multi Share |
+|------|-------------------|
+| Downtown | **45%** |
+| Inner City | 38% |
+| Neighborhoods | 26% |
+| Suburban | 13% |
+
+The 3.4× difference between downtown and suburban Large Multi presence reflects economic reality: prime tourist locations justify professional management overhead, while peripheral zones remain the domain of spare-room hosts.
+
+### Downtown's Quality Paradox
+
+Here's where geography gets interesting. Downtown—dominated by Large Multi operators who achieve only 32% superhost rate market-wide—somehow delivers **48% superhost rate** overall.
+
+![Placeholder: Superhost Rate by Distance Zone]
+
+How? Competition elevates everyone's game.
+
+![Placeholder: Downtown Quality Uplift by Host Category]
+
+| Host Category | Market Superhost Rate | Downtown Superhost Rate | Uplift |
+|--------------|----------------------|------------------------|--------|
+| Individual | 39% | 41% | +2% |
+| Small Multi | 47% | 46% | -1% |
+| Medium Multi | 45% | **58%** | **+13%** |
+| Large Multi | 32% | **45%** | **+13%** |
+
+Medium Multi hosts in downtown achieve **58% superhost rate**—13 percentage points above their market average. Even Large Multi operators perform significantly better downtown (+13%). The competitive intensity of prime locations forces quality adaptation.
+
+Downtown doesn't just attract professional operators; it improves them.
+
+### The Inner City Puzzle
+
+Despite geographic centrality, Inner City (1-3km) shows the **lowest location ratings** with the highest variance.
+
+![Placeholder: Location Ratings by Distance Zone]
+
+This zone—the market's largest segment—combines diverse neighborhoods with varying appeal. It may also signal an expectation mismatch: guests book "central" listings expecting walkability to attractions, then discover practical accessibility challenges. With 72% of Inner City listings priced under €60, this zone primarily serves budget-conscious travelers—perhaps those most sensitive to location friction.
+
+### Price Positioning by Zone
+
+Geography shapes pricing strategy.
+
+![Placeholder: Price Segment Distribution by Distance Zone]
+
+| Zone | Premium (€80+) | Budget (<€60) |
+|------|----------------|---------------|
+| Downtown | **31%** | 48% |
+| Inner City | 12% | **72%** |
+| Neighborhoods | 15% | 64% |
+| Suburban | 43% | 38% |
+
+Downtown commands premium positioning. Inner City is decisively the budget zone. Suburban shows bimodality—likely larger properties or unique offerings that justify distance.
+
+---
+
+## Temporal Dynamics: A Market in Motion
+
+The geographic analysis revealed downtown's current dominance. But Thessaloniki's STR market is young and rapidly evolving. Where is it heading?
+
+### The Youth of the Market
+
+![Placeholder: Listings by First Review Year]
+
+**Over half of all active listings are less than 2 years old.** The post-pandemic period has seen explosive growth—2022, 2023, and 2024 each set new records for market entries. Early 2025 data suggests this trajectory continues.
+
+| Market Maturity | Time in Market | Share |
+|----------------|----------------|-------|
+| **New** | <2 years | 52% |
+| **Growing** | 2-4 years | 24% |
+| **Mature** | 4-8 years | 16% |
+| **Established** | >8 years | 8% |
+
+This is a young market, still finding its equilibrium.
+
+### Who's Driving the Boom?
+
+The post-pandemic expansion reveals market polarization.
+
+![Placeholder: Host Category Composition by Market Maturity]
+
+| Host Category | Established (>8yr) | New (<2yr) | Trend |
+|--------------|-------------------|------------|-------|
+| Large Multi | 25% | **43%** | ↑↑ |
+| Individual | 20% | **24%** | ↑ |
+| Small + Medium Multi | 55% | 33% | ↓↓ |
+
+**Large Multi operators nearly doubled their market share** from pre-2017 to post-2022—institutional capital entering the sector. But Individual hosts also rebounded strongly, suggesting Greeks increasingly view tourism as an accessible income stream.
+
+The squeeze is on mid-scale operators. The market appears to be bifurcating: professional platforms versus personal hosting, with shrinking room for hybrid models.
+
+### The Quality Divergence
+
+New listings show dramatically higher rating variance than established ones—**2.4× greater standard deviation** (σ = 0.51 vs 0.21).
+
+![Placeholder: Quality Variance by Market Maturity]
+
+Levene's test confirms this isn't sampling noise (p < 0.001). Quality predictability declines with market youth: some new entrants excel immediately while others underperform significantly.
+
+### Where Quality Is Eroding
+
+The variance story has a specific shape. Premium listings (>€120) maintain quality across all host types and market maturities. The concern is in the budget segment.
+
+![Placeholder: Quality by Host Type Across Age Cohorts]
+
+**Large Multi hosts show clear quality decline in budget categories** (Low and Very Low priced listings) among post-2021 entrants. Individual and Small Multi hosts maintain stable quality across the same period.
+
+![Placeholder: Large Multi Quality Decline Heatmap]
+
+Zooming into core zones (Downtown and Inner City) for 2021-2025:
+
+![Placeholder: Large Multi Budget Quality - Core Zones]
+
+Downtown's Low-budget (€40-60) segment and Inner City's Very Low (<€40) segment both show declining trajectories. Statistical significance is modest (small effect sizes), but the directional finding is consistent: **the "quality uplifter" effect identified in downtown appears to be eroding under volume pressure**.
+
+---
+
+## The Bigger Picture
+
+Thessaloniki's short-term rental market is, by most measures, healthy. High regulatory compliance. Competitive dynamics that prevent scale advantages. Downtown competition that elevates quality. A diverse host ecosystem serving multiple market segments.
+
+But the data reveals tensions worth monitoring:
+
+**Quality divergence is real.** New listings from Large Multi operators in budget segments show emerging quality concerns—variance is increasing, and mean ratings are declining in core zones. This isn't crisis-level, but it's the kind of trend that compounds over time.
+
+**Scale is rewarded differently than quality.** Large operators achieve market share through volume, but their quality premium is diluted. This creates structural incentives that may not align with destination reputation goals.
+
+**The mid-scale squeeze matters.** Hosts with 2-10 listings achieve the best quality metrics, but they're losing market share to both ends of the spectrum. If this segment contracts further, the market loses its quality backbone.
+
+**Geography concentrates everything.** 86% of listings cluster within 3km of center. Any quality or saturation issues in downtown ripple through the entire market.
+
+For policymakers, the implications are clear: **host diversity matters**. The optimal tourism ecosystem isn't one dominated by commercial operators or individual hosts—it's one where mid-scale professionalization thrives alongside authentic hosting, competition enforces quality standards, and regulatory oversight prevents concentration from undermining market health.
+
+Thessaloniki's STR market has the pieces in place. The question is whether growth continues to strengthen the ecosystem—or begins to erode it.
+
+---
+
+## Methodology Notes
+
+- **Data source**: Inside Airbnb (June 2025 snapshot)
+- **Sample**: 4,124 licensed listings after compliance filtering
+- **Statistical approach**: Non-parametric tests (Kruskal-Wallis, Mann-Whitney U) with effect size reporting (ε², Cramér's V, rank-biserial correlation)
+- **Geographic reference**: White Tower / Aristotelous Square midpoint (40.62962°N, 22.94473°E)
+- **Market maturity proxy**: First review date
+- **Limitations**: Revenue estimates based on occupancy proxies; suburban sample (n=91) limits statistical power for that segment; first review date may not precisely capture market entry
+
+---
+
+*This analysis was conducted as part of a data analytics portfolio project. The accompanying Power BI dashboard provides interactive exploration of these findings.*
