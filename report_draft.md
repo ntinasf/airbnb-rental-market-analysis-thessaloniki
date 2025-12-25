@@ -50,9 +50,9 @@ patterns to identify regulatory framework effectiveness and concentration risks.
 
 #### **Main Findings**
 
-* 6 licenses are shared across more than one host, 5 of them at more than one location
-* 74 such listings (28.5% of duplicate licenses) will be dropped from further analysis
-* A particular host holds 29 different listings under one license, and 43 listings (16.5% of total duplicate listings) under 6 licenses overall
+* 6 licenses are shared across more than one host, 5 of them at more than one location.
+* 74 such listings (28.5% of duplicate licenses) will be dropped from further analysis.
+* A particular host holds 29 different listings under one license, and 43 listings (16.5% of total duplicate listings) under 6 licenses overall.
 
 ### **Summary and Recommendations**
 
