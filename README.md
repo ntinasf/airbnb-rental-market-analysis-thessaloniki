@@ -2,32 +2,32 @@
 
 A data-driven examination of 4,124 Airbnb listings to inform sustainable tourism policy.
 
-![Placeholder: Dashboard Overview](pictures/dashboard_overview.png)
+![Dashboard Overview](images/Dashboard%20overview.png)
 
 ---
 
 ## Overview
 
-Thessaloniki's short-term rental market has grown rapidly in recent years. This project analyzes regulatory compliance, host ecosystem dynamics, geographic performance patterns, and temporal quality trends to provide evidence-based policy recommendations.
+Thessaloniki's short-term rental market has experienced explosive growth in recent years. This project analyzes regulatory compliance, host ecosystem dynamics, geographic performance patterns, and temporal quality trends to answer one question: **Is the market healthy?**
 
-**Key question:** Is the market healthy, and where should policymakers focus attention?
+**Short answer:** Mostly yes, but with caveats worth monitoring.
 
-**Short answer:** Mostly yes, with caveats worth monitoring.
+The analysis reveals a competitive market where scale provides no revenue advantage, but quality systematically declines with host size. Mid-scale operators (2-10 listings) emerge as the market's quality backbone, yet they're being squeezed by polarization toward individual hosts and large commercial operators.
 
 ---
 
 ## Key Findings
 
-| Dimension | Finding | Effect Size |
-|-----------|---------|-------------|
-| Compliance | 97.3% licensing rate; 2 hosts control 42% of exemptions | - |
-| Host Quality | 0.27-star gap between Individual (4.90) and Large Multi (4.70) hosts | ε² = 0.12 |
-| Superhost Premium | 3.2x revenue multiplier for individuals vs 1.7x for large operators | Large effect |
-| Geography | 86% of listings within 3km of center; downtown elevates quality | ε² = 0.19 (location ratings) |
-| Trajectory | Large Multi hosts doubled market share post-pandemic (25% to 43%) | - |
-| Quality Variance | New listings show 2.4x rating variance vs established ones | p < 0.001 |
+| Dimension | Finding |
+|-----------|---------|
+| **Compliance** | 97.3% licensing rate; 2 hosts control 42% of exemptions |
+| **Host Quality** | 0.21-star gap between Individual (4.92★) and Large Multi (4.71★) hosts |
+| **Superhost Premium** | 3.2x revenue multiplier for individuals vs 1.6x for large operators |
+| **Geography** | 86% of listings within 3km of center; downtown competition elevates quality (+13% superhost rate for Large Multi) |
+| **Trajectory** | Large Multi hosts nearly doubled market share post-pandemic (25% → 43%) |
+| **Quality Variance** | New listings show 2.4x rating variance vs established ones |
 
-Mid-scale operators (2-10 listings) emerge as the market's quality backbone with highest superhost rates (45-47%).
+![Review Scores by Host Type](images/Review%20scores%20by%20host%20types.png)
 
 ---
 
@@ -35,32 +35,53 @@ Mid-scale operators (2-10 listings) emerge as the market's quality backbone with
 
 ```
 airbnb-rental-market-analysis-thessaloniki/
-│
 ├── data/
-│   ├── raw/                      # Original Inside Airbnb data
-│   └── processed/                # Cleaned analysis-ready datasets
-│
+│   ├── raw/                        # Original Inside Airbnb data
+│   └── processed/                  # Cleaned analysis-ready datasets
+├── images/                         # Exported visualizations
 ├── notebooks/
 │   ├── regulatory_compliance.ipynb
 │   ├── host_type_impact.ipynb
 │   ├── geographic_performance.ipynb
 │   └── temporal_dynamics.ipynb
-│
+├── powerbi/
+│   └── DAX_formulas.md
 ├── scripts/
 │   ├── data_preprocessing.py
 │   ├── calendar_preprocessing.py
+│   ├── data_preprocessing_log.md
 │   └── eda_functions.py
-│
-├── powerbi/
-│   └── DAX_formulas.md
-│
-├── pictures/                     # Visualizations for README and reports
-│
-├── report.md                     # Full analytical report
-├── executive_summary.md          # Policy brief
+├── report.md                       # Full analytical report
 ├── requirements.txt
 └── README.md
 ```
+
+---
+
+## Data Validation
+
+Raw data from Inside Airbnb underwent validation and cleaning before analysis:
+
+- **Anonymization**: Host IDs, listing IDs, and licenses hashed; coordinates rounded to ~11m accuracy
+- **Outlier removal**: Extreme `minimum_nights` and price outliers excluded
+- **Inactive filtering**: Dead listings (zero activity + missing reviews) removed
+- **Missing value imputation**: Host categories imputed from actual listing counts per host
+- **Feature engineering**: Distance zones, price segments, market maturity categories
+
+See [`scripts/data_preprocessing_log.md`](scripts/data_preprocessing_log.md) for full methodology.
+
+**Final sample**: 4,124 licensed listings after compliance and data validation filtering.
+
+---
+
+## Explore the Analysis
+
+| Notebook | Description |
+|----------|-------------|
+| [Regulatory Compliance](notebooks/regulatory_compliance.ipynb) | License distribution, exemption concentration, compliance anomalies |
+| [Host Type Impact](notebooks/host_type_impact.ipynb) | Scale vs quality dynamics, superhost achievement, revenue analysis |
+| [Geographic Performance](notebooks/geographic_performance.ipynb) | Spatial clustering, downtown quality paradox, zone-based pricing |
+| [Temporal Dynamics](notebooks/temporal_dynamics.ipynb) | Market maturity trends, quality divergence, Large multihosts trajectory |
 
 ---
 
@@ -68,11 +89,9 @@ airbnb-rental-market-analysis-thessaloniki/
 
 **Data Source:** Inside Airbnb (June 2025 snapshot)
 
-**Sample:** 4,124 licensed listings after compliance filtering
-
 **Statistical Approach:**
 - Non-parametric tests (Kruskal-Wallis, Mann-Whitney U) for group comparisons
-- Effect size reporting (ε², Cramer's V, rank-biserial correlation)
+- Effect size reporting (ε², Cramér's V, rank-biserial correlation) alongside p-values
 - Levene's test for variance homogeneity
 
 **Geographic Reference:** White Tower / Aristotelous Square midpoint (40.62962°N, 22.94473°E)
@@ -87,26 +106,12 @@ airbnb-rental-market-analysis-thessaloniki/
 
 ---
 
-## Visualizations
+## Reports & Dashboards
 
-### Host Ecosystem
-![Placeholder: Review Scores by Host Type](pictures/review_scores_host_type.png)
-
-### Geographic Patterns
-![Placeholder: Superhost Rate by Zone](pictures/superhost_by_zone.png)
-
-### Temporal Dynamics
-![Placeholder: Quality Variance by Market Maturity](pictures/quality_variance_maturity.png)
-
----
-
-## Reports
-
-| Document | Description |
+| Resource | Description |
 |----------|-------------|
-| [Full Report](report.md) | Detailed analysis with statistical findings |
-| [Executive Summary](executive_summary.md) | Policy brief with recommendations |
-| [Power BI Dashboard](powerbi/) | Interactive exploration |
+| [Full Report](report.md) | Narrative analysis with statistical findings and policy implications |
+| [Power BI Dashboard](powerbi/) | Interactive exploration of key metrics |
 
 ---
 
@@ -114,7 +119,7 @@ airbnb-rental-market-analysis-thessaloniki/
 
 ```bash
 # Clone repository
-git clone https://github.com/[username]/airbnb-rental-market-analysis-thessaloniki.git
+git clone https://github.com/ntinasf/airbnb-rental-market-analysis-thessaloniki.git
 cd airbnb-rental-market-analysis-thessaloniki
 
 # Create environment
@@ -134,19 +139,17 @@ jupyter notebook notebooks/
 
 | Dataset | Source | Records |
 |---------|--------|---------|
-| Listings | [Inside Airbnb](http://insideairbnb.com/) | 4,700+ |
+| Listings | [Inside Airbnb](http://insideairbnb.com/) | 4,700+ raw → 4,124 cleaned |
 | Calendar | Inside Airbnb | ~1.7M rows |
 | Neighbourhoods | Inside Airbnb | GeoJSON |
-
-All data publicly available. Analysis conducted on June 2025 snapshot.
 
 ---
 
 ## Author
 
-**[Your Name]**
+**[Placeholder: Your Name]**
 
-[Portfolio](https://yourwebsite.com) | [LinkedIn](https://linkedin.com/in/yourprofile)
+[Portfolio](https://placeholder-portfolio.com) | [LinkedIn](https://linkedin.com/in/placeholder)
 
 ---
 

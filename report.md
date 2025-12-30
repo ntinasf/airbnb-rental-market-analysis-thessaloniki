@@ -53,7 +53,7 @@ Thessaloniki's STR market operates on two parallel tracks: a fragmented base of 
 
 The math is stark: while most hosts are small operators, most listings belong to commercial players. A single operator controls nearly **7% of Thessaloniki's entire Airbnb inventory**. The boxplot reveals extreme outliers—some hosts manage portfolios spanning 200-1,000+ properties globally.
 
-![Distribution of Host Total Listings Count](images/Host%20total%20listing%20count.png)
+![Host distribution boxplot](images/Host%20distribution%20boxplot.png)
 
 This isn't inherently problematic. Professional operators can bring efficiency, consistent standards, and tourism infrastructure to markets that need it. The question is whether scale delivers value to guests—or extracts it.
 
@@ -106,7 +106,7 @@ Here **mid-scale operators (2-10 listings) achieve the highest superhost rates**
 
 Does the quality investment pay off? Absolutely, but unevenly across categories.
 
-<img src="images/Superhost%20premium%20by%20host%20category.png" alt="Superhost Revenue Premium by Host Category" width="500">
+<img src="images/Superhost%20premium%20by%20host%20category.png" alt="Superhost Revenue Premium by Host Category" width="700" align="center">
 
 | Host Category | Mean Revenue Multiplier (SH vs Non-SH) |
 |--------------|-----------------------------------|
@@ -252,7 +252,7 @@ The squeeze is on mid-scale operators. The market appears to be bifurcating: pro
 
 New listings show dramatically higher rating variance than established ones, scoring almost **2.4× greater standard deviation** (σ = 0.51 vs 0.21).
 
-<img src="images/Quality%20variance%20by%20maturity.png" alt="Quality Variance by Market Maturity" width="400">
+<img src="images/Quality%20variance%20by%20maturity.png" alt="Quality Variance by Market Maturity" width="500" align="center">
 
 Levene's test confirms this isn't just sampling noise (p < 0.001). Quality predictability declines with market growth: some new entrants excel immediately while others underperform significantly.
 
@@ -264,7 +264,7 @@ The variance story has a specific shape. An upward trend in premium listing (>�
 
 **Large Multi hosts show clear quality decline in budget categories** (Low and Very Low priced listings) among post-2023 entrants, while Individual and Small/ Medium multihosts maintain stable quality across the same period.
 
-![Large Multi Quality Decline Heatmap](images/Large%20multi%20quality%20heatmap.png)
+<img src="images/Large%20multi%20quality%20heatmap.png" alt="Large Multi Quality Heatmap" width="500" align="center">
 
 Zooming into core zones (Downtown and Inner City) for 2021-2025:
 
