@@ -1,4 +1,2 @@
 *.gz
 *.csv
-*.parquet
-.github

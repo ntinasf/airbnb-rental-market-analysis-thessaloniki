@@ -106,7 +106,9 @@ Here **mid-scale operators (2-10 listings) achieve the highest superhost rates**
 
 Does the quality investment pay off? Absolutely, but unevenly across categories.
 
-<img src="images/Superhost%20premium%20by%20host%20category.png" alt="Superhost Revenue Premium by Host Category" width="700" align="center">
+<p align="center">
+    <img src="images/Superhost%20premium%20by%20host%20category.png" alt="Superhost Revenue Premium by Host Category" width="700">
+</p>
 
 | Host Category | Mean Revenue Multiplier (SH vs Non-SH) |
 |--------------|-----------------------------------|
@@ -251,8 +253,9 @@ The squeeze is on mid-scale operators. The market appears to be bifurcating: pro
 ### The Quality Divergence
 
 New listings show dramatically higher rating variance than established ones, scoring almost **2.4× greater standard deviation** (σ = 0.51 vs 0.21).
-
-<img src="images/Quality%20variance%20by%20maturity.png" alt="Quality Variance by Market Maturity" width="500" align="center">
+<p align="center">
+    <img src="images/Quality%20variance%20by%20maturity.png" alt="Quality Variance by Market Maturity" width="500">
+</p>
 
 Levene's test confirms this isn't just sampling noise (p < 0.001). Quality predictability declines with market growth: some new entrants excel immediately while others underperform significantly.
 
@@ -264,7 +267,9 @@ The variance story has a specific shape. An upward trend in premium listing (>�
 
 **Large Multi hosts show clear quality decline in budget categories** (Low and Very Low priced listings) among post-2023 entrants, while Individual and Small/ Medium multihosts maintain stable quality across the same period.
 
-<img src="images/Large%20multi%20quality%20heatmap.png" alt="Large Multi Quality Heatmap" width="500" align="center">
+<p align="center">
+    <img src="images/Large%20multi%20quality%20heatmap.png" alt="Large Multi Quality Heatmap" width="500">
+</p>
 
 Zooming into core zones (Downtown and Inner City) for 2021-2025:
 
@@ -298,7 +303,7 @@ Thessaloniki's STR market has the pieces in place. The question is whether growt
 
 - **Data source**: Inside Airbnb (June 2025 snapshot).
 - **Sample**: 4,124 licensed listings after compliance and data validation filtering.
-- **Statistical approach**: Non-parametric tests (Kruskal-Wallis, Mann-Whitney U) with effect size reporting (ε², Cramér's V, rank-biserial correlation).
+- **Statistical approach**: Non-parametric tests (Kruskal-Wallis, Mann-Whitney U) with effect size reporting (ε², Cramér's V, rank-biserial correlation). Levene's test for variance homogeneity
 - **Geographic reference**: White Tower / Aristotelous Square midpoint (40.62962°N, 22.94473°E).
 - **Market maturity proxy**: First review date.
 - **Limitations**: Revenue estimates based on occupancy proxies; suburban sample (n=91) limits statistical power for that segment; first review date may not precisely capture market entry timing; Regulatory compliance concerns should be validated with additional data sources and regulatory guidelines to ensure comprehensive assessment.

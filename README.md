@@ -87,7 +87,7 @@ See [`scripts/data_preprocessing_log.md`](scripts/data_preprocessing_log.md) for
 
 ## Methodology
 
-**Data Source:** Inside Airbnb (June 2025 snapshot)
+**Data Source:** [Inside Airbnb](https://insideairbnb.com/get-the-data/) (June 2025 snapshot)
 
 **Statistical Approach:**
 - Non-parametric tests (Kruskal-Wallis, Mann-Whitney U) for group comparisons
@@ -140,7 +140,6 @@ jupyter notebook notebooks/
 | Dataset | Source | Records |
 |---------|--------|---------|
 | Listings | [Inside Airbnb](http://insideairbnb.com/) | 4,700+ raw → 4,124 cleaned |
-| Calendar | Inside Airbnb | ~1.7M rows |
 | Neighbourhoods | Inside Airbnb | GeoJSON |
 
 ---
