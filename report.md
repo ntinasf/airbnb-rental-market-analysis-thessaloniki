@@ -6,7 +6,7 @@
 
 <h2 align="center">The Story in Numbers</h2>
 
-Thessaloniki is Greece's second city, a historic cultural hub and an increasingly popular destination. During recent years, it has experienced a short-term rental boom. But behind the captivating sunset landscapes lies a more complex story about who's running the city's tourism infrastructure, where the money flows, and whether rapid growth is coming at the cost of guest experience.
+Thessaloniki is Greece's second city, a historic cultural hub and an increasingly popular destination. During recent years, it has experienced a short-term rental boom. But behind this impressive growth lies a more complex story about who's running the city's tourism infrastructure, where the money flows, and whether rapid growth is coming at the cost of guest experience.
 
 This analysis examines **4,124 licensed Airbnb listings** to answer a simple question: *Is Thessaloniki's STR market healthy?*
 
@@ -307,7 +307,7 @@ Thessaloniki's STR market has the pieces in place. The question is whether growt
 - **Geographic reference**: White Tower / Aristotelous Square midpoint (40.62962°N, 22.94473°E).
 - **Market maturity proxy**: First review date.
 - **Limitations**: Revenue estimates based on occupancy proxies; suburban sample (n=91) limits statistical power for that segment; first review date may not precisely capture market entry timing; Regulatory compliance concerns should be validated with additional data sources and regulatory guidelines to ensure comprehensive assessment.
-
+-- **Data anonymization**: All data presented is stripped of personally identifiable information.
 ---
 
 *This analysis was conducted as part of a data analytics portfolio project. The accompanying Power BI dashboard provides interactive exploration of these findings. For more info and statistical testing results refer to the project's notebooks.*
