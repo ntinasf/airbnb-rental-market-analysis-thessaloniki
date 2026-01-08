@@ -1,8 +1,10 @@
 <h1 align="center">Thessaloniki's Short-Term Rental Market: A Data-Driven Analysis</h1>
 
- <h2 align="center">*See the full analysis with the accompanying Power BI dashboard [here](https://ntinasf.github.io/projects/thessaloniki-airbnb/) .*</h2>
----
+<div align="center">
+  <h2><em>See the full analysis with the accompanying Power BI dashboard <a href="https://ntinasf.github.io/projects/thessaloniki-airbnb/">here</a></em></h2>
+</div>
 
+---
 <h2 align="center">The Story in Numbers</h2>
 
 Thessaloniki is Greece's second city, a historic cultural hub and an increasingly popular destination. During recent years, it has experienced a short-term rental boom. But behind this impressive growth lies a more complex story about who's running the city's tourism infrastructure, where the money flows, and whether rapid growth is coming at the cost of guest experience.
