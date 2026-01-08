@@ -1,7 +1,6 @@
 <h1 align="center">Thessaloniki's Short-Term Rental Market: A Data-Driven Analysis</h1>
-
-<p align="center"><em>An evidence-based examination of 4,124 Airbnb listings to inform sustainable tourism policy</em></p>
-
+---
+ *See the full analysis with the accompanying Power BI dashboard [here](https://ntinasf.github.io/projects/thessaloniki-airbnb/) .*
 ---
 
 <h2 align="center">The Story in Numbers</h2>
@@ -307,7 +306,7 @@ Thessaloniki's STR market has the pieces in place. The question is whether growt
 - **Geographic reference**: White Tower / Aristotelous Square midpoint (40.62962°N, 22.94473°E).
 - **Market maturity proxy**: First review date.
 - **Limitations**: Revenue estimates based on occupancy proxies; suburban sample (n=91) limits statistical power for that segment; first review date may not precisely capture market entry timing; Regulatory compliance concerns should be validated with additional data sources and regulatory guidelines to ensure comprehensive assessment.
--- **Data anonymization**: All data presented is stripped of personally identifiable information.
+- **Data anonymization**: All data presented is stripped of personally identifiable information.
 ---
 
-*This analysis was conducted as part of a data analytics portfolio project. The accompanying Power BI dashboard provides interactive exploration of these findings. For more info and statistical testing results refer to the project's notebooks.*
+*This analysis was conducted as part of a data analytics portfolio project. For more info and statistical testing results refer to the project's notebooks.*
