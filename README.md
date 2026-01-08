@@ -8,7 +8,7 @@ A data-driven examination of 4,124 Airbnb listings to inform sustainable tourism
 
 ## Overview
 
-Thessaloniki's short-term rental market has experienced explosive growth in recent years. This project analyzes regulatory compliance, host ecosystem dynamics, geographic performance patterns, and temporal quality trends to answer one question: **Is the market healthy?**
+Thessaloniki's short-term rental market has experienced explosive growth in recent years. This project analyzes regulatory compliance, host ecosystem dynamics, geographic performance patterns and temporal quality trends to answer one question: **Is the market healthy?**
 
 **Short answer:** Mostly yes, but with caveats worth monitoring.
 
@@ -146,9 +146,9 @@ jupyter notebook notebooks/
 
 ## Author
 
-**[Placeholder: Your Name]**
+**Ntinas Fotios**
 
-[Portfolio](https://placeholder-portfolio.com) | [LinkedIn](https://linkedin.com/in/placeholder)
+[Portfolio](https://ntinasf.github.io) | [LinkedIn](https://linkedin.com/in/fotios-ntinas-4a3b4a2b7)
 
 ---
 
