@@ -1,6 +1,6 @@
 <h1 align="center">Thessaloniki's Short-Term Rental Market: A Data-Driven Analysis</h1>
 
- *See the full analysis with the accompanying Power BI dashboard [here](https://ntinasf.github.io/projects/thessaloniki-airbnb/) .*
+ <h2 align="center">*See the full analysis with the accompanying Power BI dashboard [here](https://ntinasf.github.io/projects/thessaloniki-airbnb/) .*</h2>
 ---
 
 <h2 align="center">The Story in Numbers</h2>
